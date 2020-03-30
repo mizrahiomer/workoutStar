@@ -27,7 +27,8 @@ io.on('connection', (socket) => {
     users.addUser(socket.id,params.admin,params.room);
     console.log(video.status)
     if(video.status == 'play'){
-      socket.emit('playVideoFromServer')
+      console.log(video.timestemp)
+      socket.emit('playVideoFromServer',{currentTime: video.timestemp})
     }
   });
 
@@ -36,17 +37,29 @@ io.on('connection', (socket) => {
   });
 
 
-  socket.on('stopVideo', () => {
+  socket.on('stopVideo', (params,callback) => {
     var user = users.getUser(socket.id);
-    video.setStatus('pause');
-    io.to(user.room).emit('stopVideoFromServer');
+    if(user.admin){    
+      video.setStatus('pause');
+      video.setTime(params.currentTime)
+      io.to(user.room).emit('stopVideoFromServer');
+    }
   });
 
-  socket.on('playVideo', () => {
+  socket.on('playVideo', (params,callback) => {
     var user = users.getUser(socket.id);
-    video.setStatus('play');
-    console.log(video.status)
+    if(user.admin){
+      video.setStatus('play');
+      video.setTime(params.currentTime)
+    }
     io.to(user.room).emit('playVideoFromServer');
+  })
+
+  socket.on('updateCurrentTime',(params,callback) => {    
+    var user = users.getUser(socket.id);
+    if(user && user.admin){
+      video.setTime(params.currentTime)
+    }
   })
 
 });

@@ -8,6 +8,10 @@ class Video{
         this.status = status;
     }
 
+    setTime(time){
+        this.timestemp = time;
+    }
+
 
 }
 
