@@ -32,6 +32,12 @@ function catchError(event){
   if(event.data == 100) console.log("De video bestaat niet meer");
 }
 
+function onPlayIsReady() {
+  var params = deparam(window.location.search);
+  socket.emit('join',params,function(err){
+});
+
+}
 
 function loadPlayer(room) { 
     if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
@@ -59,7 +65,8 @@ function onYouTubePlayer(room) {
         playerVars: { 'autoplay': 0, 'controls': 0, 'showinfo': 0 },
         events: {
           'onStateChange': onPlayerStateChange,
-          'onError': catchError
+          'onError': catchError,
+          'onReady': onPlayIsReady
         }
     });
 }
@@ -78,8 +85,5 @@ $(document).ready( function() {
     var {room,admin} = params;
     loadPlayer(room);
 
-    var params = deparam(window.location.search);
-    socket.emit('join',params,function(err){
-    });
 
 });
