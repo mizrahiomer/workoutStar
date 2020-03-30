@@ -3,9 +3,6 @@ var socket = io();
 var player;
 
 socket.on('connect', function () {
-    var params = deparam(window.location.search);
-    socket.emit('join',params,function(err){
-    });
 });
 
 socket.on('stopVideoFromServer',function() {
@@ -80,4 +77,9 @@ $(document).ready( function() {
     var params = deparam(window.location.search);
     var {room,admin} = params;
     loadPlayer(room);
+
+    var params = deparam(window.location.search);
+    socket.emit('join',params,function(err){
+    });
+
 });

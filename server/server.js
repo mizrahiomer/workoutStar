@@ -26,9 +26,9 @@ io.on('connection', (socket) => {
     users.removeUser(socket.id);
     users.addUser(socket.id,params.admin,params.room);
     console.log(video.status)
-    // if(video.status == 'play'){
-    //   socket.emit('playVideoFromServer')
-    // }
+    if(video.status == 'play'){
+      socket.emit('playVideoFromServer')
+    }
   });
 
   socket.on('disconnect', () => {
