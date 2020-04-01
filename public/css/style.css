@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
 body{
   margin: auto 0;
@@ -10,7 +11,6 @@ body{
   background-color: white;
   background-size: cover;
   overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
 }
 
 section{
@@ -18,14 +18,129 @@ section{
   padding-right: 8px;
   display: block;
   text-align: center;
-  background-color: rgba(0,0,0,0.5);
   border-radius: 10px;
-  margin: auto auto;
+  margin: 25px auto;
   position: relative;
+  width: 650px;
 }
 #cover{
   width: 100%;
   height:100%;
   position: absolute;
   z-index: 1000;
+}
+
+
+nav{
+  width: 250px;
+  height: 100%;
+  position: relative;
+  background-color: #5d72d9;
+}
+nav #participents-list{
+  height: 90%;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
+  margin-left: 0px;
+  margin-top: 40px;
+  padding-left: 10px;
+  overflow-y: scroll;
+  direction: rtl;
+}
+/* width */
+#participents-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#participents-list::-webkit-scrollbar-track {
+  background: #5d72d9;
+}
+
+/* Handle */
+#participents-list::-webkit-scrollbar-thumb {
+  background: #40509c;
+}
+
+/* Handle on hover */
+#participents-list::-webkit-scrollbar-thumb:hover {
+  background: #33438f;
+}
+
+nav .participent-card{
+  width: 100%;
+  margin: 5px auto;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+nav.close .participent-card{
+  margin: 0px;
+  width: 150%;
+}
+
+.participent-card img{
+  height: 50px;
+  position: absolute;
+  bottom: 0px;
+}
+nav.close .participent-card img{
+  display: none;
+}
+.participent-card video{
+  width: 100%;
+}
+
+
+
+#main-page{
+  width: 100%;
+  margin: 25px;
+}
+
+#progress-bar{
+  position: relative;
+}
+
+#load{
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+  position: absolute;
+  top:0px;
+  border-bottom: 5px solid #262626;
+  background-image: url('../images/running.gif'), url('../images/flag.svg');
+  background-position: right, left;
+  background-size: 50px;
+  background-repeat: no-repeat;
+}
+
+#timeleft{
+  text-align: center;
+  position: relative;
+  font-family: 'Comic Neue', cursive;
+}
+
+#copyBtn{
+  padding: 5px 10px;
+  right: 1rem;
+  bottom: 1rem;
+  position: absolute;
+}
+
+
+nav.open .fa-arrow-right,nav.close .fa-arrow-left{
+  display: none;
+}
+#toggle-nav{
+  background-color: transparent;
+  color:white;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 0px;
+  border: 0px;
+  margin: 0.5rem
 }

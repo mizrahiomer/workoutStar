@@ -3,20 +3,70 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/a25e0ac1b4.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Test</title>
   </head>
 
   <body class="joinPage">
-    <section>
-      <div id="cover"></div>
-      <div id="player"></div>
-    </section>
+    <nav class="open">
+      <button id="toggle-nav" onclick="toggleNav()">
+        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div id="participents-list">
+
+      </div>
+    </nav>
+
+    <div id="main-page">
+      <div id="progress-bar">
+        <h2 id="timeleft"></h2>
+        <div id="load">
+        </div>
+      </div>
+      <section>
+        <div id="cover"></div>
+        <div id="player"></div>
+      </section>
+      <button id="copyBtn" onclick="copyUrl()">
+        Get link to share <i class="far fa-copy"></i>
+      </button>
+    </div>
+
+    <script>
+      function toggleNav(){
+        var nav = document.querySelector('nav');
+        if(nav.style.width == '250px'){
+          nav.style.width = '75px';
+          nav.classList.remove('open');
+          nav.classList.add('close');
+        } else {
+          nav.style.width = '250px'
+          nav.classList.add('open');
+          nav.classList.remove('close');
+        }
+      }
+      function copyUrl() {
+        /* Get the text field */
+        var dummy = document.createElement('input'),
+            text = window.location.href+'&admin=0';
+      
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+        /* Alert the copied text */
+          alert("Copied the text: " + dummy.value);
+      }
+    </script>
+    <script src="/js/libs/getMediaElement.js"></script>
+    <script src="/js/libs/RTCMultiConnection.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/libs/moment/moment.js"></script>
-    <script src="/js/libs/mustache.js"></script>
     <script src="/js/libs/deparam.js"></script>
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/videoControl.js"></script>
+    <script src="/js/participents.js"></script>
   </body>
 </html>

@@ -5,6 +5,7 @@ class Users{
 
   addUser(id,admin,room){
     var user = {id,admin,room};
+    if(user.admin == undefined) user.admin = true;
     this.users.push(user);
     return user;
   }

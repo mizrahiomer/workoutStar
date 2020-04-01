@@ -22,9 +22,9 @@ io.on('connection', (socket) => {
   console.log('New user connected');
 
   socket.on('join',(params,callback) => {
-    socket.join(params.room);
+    socket.join(params.sessionid);
     users.removeUser(socket.id);
-    users.addUser(socket.id,params.admin,params.room);
+    users.addUser(socket.id,params.admin,params.sessionid);
     console.log(video.status)
     if(video.status == 'play'){
       console.log(video.timestemp)
@@ -34,6 +34,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     var user = users.removeUser(socket.id);
+    console.log('User has leaved ');
   });
 
 
@@ -49,6 +50,7 @@ io.on('connection', (socket) => {
   socket.on('playVideo', (params,callback) => {
     var user = users.getUser(socket.id);
     if(user.admin){
+      console.log('play')
       video.setStatus('play');
       video.setTime(params.currentTime)
     }
