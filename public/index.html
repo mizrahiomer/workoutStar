@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/a25e0ac1b4.js" crossorigin="anonymous"></script>
+    <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Workout Session!</title>
   </head>
@@ -45,6 +46,9 @@
           <button id="copyBtn" onclick="copyUrl()">
             Get link to share <i class="far fa-copy"></i>
           </button>
+          <button id="share-facebook" onclick="shareOnFacebook()">
+            <i class="fab fa-facebook-f"></i>
+          </button>
         </div>  
       </div>
     </div>
@@ -82,12 +86,29 @@
             general_pop.classList.remove('show')
           },2000)
       }
+
+      function shareOnFacebook(){
+        var text = window.location.href;
+        if(!text.includes('&admin=0')) text += '&admin=0';
+        var url = 'https://www.facebook.com/sharer/sharer.php?u='+text;
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.id = 'uniqId';
+        document.querySelector('#share-facebook').append(link);
+        link.click();
+        document.querySelector('#uniqId').remove(link);
+      }
+
+
+      jQuery(document).ready(function(){
+
+      })
     </script>
     <script src="/js/libs/getMediaElement.js"></script>
     <script src="/js/libs/RTCMultiConnection.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/deparam.js"></script>
-    <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/videoControl.js"></script>
     <script src="/js/participents.js"></script>
   </body>

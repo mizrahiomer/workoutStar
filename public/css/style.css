@@ -219,8 +219,9 @@ nav.close #toggle-nav{
   outline: none !important;
   border: 0px;
   background-color: #eb0000;
-  color: black;
+  color: white;
   margin: 0.5rem 0.25rem;
+  transition: all 0.5s;
 }
 
 .stream-control:hover{
@@ -231,8 +232,26 @@ nav.close #toggle-nav{
 
 .stream-control.muted{
   background-color: #f1f3f4;
+  color: grey;
 }
 
 .stream-control.muted:hover{
   background-color: #eaeaea;
+}
+
+
+#share-facebook{
+  float: right;
+  padding: 0.5rem 0.70rem;
+  height: 2rem;
+  background-color: #385898;
+  border-radius: 0.5rem;
+  border: 0px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0.65rem;
+  margin-right: -0.25rem;
+  
 }
