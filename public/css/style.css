@@ -163,6 +163,7 @@ nav.close .participent-card img{
   cursor: pointer;
   font-weight: bold;
   margin: 0.65rem;
+  float:right;
 }
 
 #btns  #copyBtn:hover{
@@ -205,4 +206,33 @@ nav.close #toggle-nav{
 #global-message.show{
   opacity: 1;
   height: auto;
+}
+
+.stream-control{
+  border-radius: 50%;
+  overflow: hidden;
+  /* background-color: #f1f3f4; */
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none !important;
+  border: 0px;
+  background-color: #eb0000;
+  color: black;
+  margin: 0.5rem 0.25rem;
+}
+
+.stream-control:hover{
+  /* background-color: #e6e6e6; */
+  background-color: #c20202;
+
+}
+
+.stream-control.muted{
+  background-color: #f1f3f4;
+}
+
+.stream-control.muted:hover{
+  background-color: #eaeaea;
 }

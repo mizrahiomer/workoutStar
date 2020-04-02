@@ -35,7 +35,13 @@
           <source src="./music/Workout Mix 2019  Fitness  Gym Motivation.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
-        <div>
+        <div style="width: 50%;">
+          <button id="audio-button" class="stream-control" onclick="toggleAudio()">
+              <i class="fas fa-microphone"></i>
+          </button>
+          <button id="video-button" class="stream-control" onclick="toggleVideo()">
+              <i class="fas fa-video"></i>
+          </button>
           <button id="copyBtn" onclick="copyUrl()">
             Get link to share <i class="far fa-copy"></i>
           </button>

@@ -1,8 +1,9 @@
 
 var participents = ['1','2','3','4','5'];
-
-
 var connection = new RTCMultiConnection();
+var audioMuted = false;
+var videoMuted = false;
+
 
 // comment-out below line if you do not have your own socket.io server
 connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
@@ -19,6 +20,31 @@ connection.sdpConstraints.mandatory = {
     OfferToReceiveVideo: true
 };
 
+function toggleAudio(){
+    var audio_btn = document.getElementById('audio-button')
+    if(audioMuted){
+        connection.attachStreams[0].unmute('audio');
+        audio_btn.classList.remove('muted');
+        audioMuted = false;
+    } else {
+        audio_btn.classList.add('muted');
+        connection.attachStreams[0].mute('audio');
+        audioMuted = true;
+    }
+}
+
+function toggleVideo(){
+    var video_btn = document.getElementById('video-button')
+    if(videoMuted){
+        connection.attachStreams[0].unmute('video');
+        video_btn.classList.remove('muted');
+        videoMuted = false;
+    } else {
+        video_btn.classList.add('muted');
+        connection.attachStreams[0].mute('video');
+        videoMuted = true;
+    }
+}
 
 function generateRandomImage(){
     var image = document.createElement('img')
@@ -41,7 +67,7 @@ $(document).ready(function() {
             title: event.userid,
             buttons: ['mute-video', 'mute-audio'],
             width: width,
-            showOnMouseEnter: false
+            showOnMouseEnter: true
         });
         mediaElement.className = 'participent-card';
         videosContainer.appendChild(mediaElement);
