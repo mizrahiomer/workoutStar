@@ -14,6 +14,7 @@ var io = socketIO(server),
 
 
 app.use('/',express.static(publicPath));
+app.use('/',navigation_routes(app,express))
 
 
 
