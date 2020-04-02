@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/a25e0ac1b4.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Test</title>
+    <title>Workout Session!</title>
   </head>
 
   <body class="joinPage">
@@ -17,7 +17,9 @@
 
       </div>
     </nav>
-
+    <div id="global-message">
+      
+    </div>
     <div id="main-page">
       <div id="progress-bar">
         <h2 id="timeleft"></h2>
@@ -29,9 +31,15 @@
         <div id="player"></div>
       </section>
       <div id="btns">
-        <button id="copyBtn" onclick="copyUrl()">
-          Get link to share <i class="far fa-copy"></i>
-        </button>
+        <audio controls>
+          <source src="./music/Workout Mix 2019  Fitness  Gym Motivation.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+        <div>
+          <button id="copyBtn" onclick="copyUrl()">
+            Get link to share <i class="far fa-copy"></i>
+          </button>
+        </div>  
       </div>
     </div>
 
@@ -51,15 +59,22 @@
       function copyUrl() {
         /* Get the text field */
         var dummy = document.createElement('input'),
-            text = window.location.href+'&admin=0';
-      
+            text = window.location.href;
+            general_pop = document.getElementById('global-message');
+            if(!text.includes('&admin=0')) text += '&admin=0';
             document.body.appendChild(dummy);
             dummy.value = text;
             dummy.select();
             document.execCommand('copy');
             document.body.removeChild(dummy);
         /* Alert the copied text */
-          alert("Copied the text: " + dummy.value);
+          general_pop.classList.add('show');
+
+          general_pop.innerText = 'The link copied to clipboard';
+
+          setTimeout(function() {
+            general_pop.classList.remove('show')
+          },2000)
       }
     </script>
     <script src="/js/libs/getMediaElement.js"></script>
