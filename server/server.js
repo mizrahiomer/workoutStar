@@ -14,7 +14,6 @@ var io = socketIO(server),
 const navigation_routes = require('./routes/navigation');
 
 
-
 app.use(express.static(publicPath));
 app.use('/',navigation_routes(app,express))
 
