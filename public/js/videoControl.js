@@ -51,8 +51,8 @@ function updateLoadBar(precetage){
   var seconds = Math.floor(secondLeft%60);
   var timeString = '';
   if(minutes > 1){
-    if(second < 10){
-      second = `0${second}`;
+    if(seconds < 10){
+      seconds = `0${seconds}`;
     }
     timeString = `${minutes}:${seconds} Minutes`
   } else {
