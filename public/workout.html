@@ -17,20 +17,14 @@
       <div id="participents-list">
 
       </div>
+      <button id="copyBtn" onclick="copyUrl()">
+        Get link to share <i class="far fa-copy"></i>
+      </button>
     </nav>
     <div id="global-message">
       
     </div>
     <div id="main-page">
-      <div id="progress-bar">
-        <h2 id="timeleft"></h2>
-        <div id="load">
-        </div>
-      </div>
-      <section>
-        <div id="cover"></div>
-        <div id="player"></div>
-      </section>
       <div id="btns">
         <audio controls>
           <source src="./music/Workout Mix 2019  Fitness  Gym Motivation.mp3" type="audio/mp3">
@@ -43,25 +37,31 @@
           <button id="video-button" class="stream-control" onclick="toggleVideo()">
               <i class="fas fa-video"></i>
           </button>
-          <button id="copyBtn" onclick="copyUrl()">
-            Get link to share <i class="far fa-copy"></i>
-          </button>
           <button id="share-facebook" onclick="shareOnFacebook()">
             <i class="fab fa-facebook-f"></i>
           </button>
         </div>  
+      </div>
+      <section>
+        <div id="cover"></div>
+        <div id="player"></div>
+      </section>
+      <div id="progress-bar">
+        <h2 id="timeleft"></h2>
+        <div id="load">
+        </div>
       </div>
     </div>
 
     <script>
       function toggleNav(){
         var nav = document.querySelector('nav');
-        if(nav.style.width == '250px'){
-          nav.style.width = '75px';
+        if(nav.style.width == '50vw'){
+          nav.style.width = '250px';
           nav.classList.remove('open');
           nav.classList.add('close');
         } else {
-          nav.style.width = '250px'
+          nav.style.width = '50vw'
           nav.classList.add('open');
           nav.classList.remove('close');
         }

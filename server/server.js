@@ -10,11 +10,11 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server),
     workout_connection = require('./routes/workout_connection')(io);
-
+var navigation_routes = require('./routes/navigation');
 
 
 app.use('/',express.static(publicPath));
-app.use('/',navigation_routes(app,express))
+// app.use('/',navigation_routes(app,express))
 
 
 

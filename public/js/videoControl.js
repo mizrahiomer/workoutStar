@@ -46,24 +46,35 @@ function onPlayIsReady(event) {
 function updateLoadBar(precetage){
   var timeleft = document.getElementById('timeleft');
   var gamification = '';
+  var secondLeft = Math.floor(player.getDuration() - player.getCurrentTime());
+  var minutes = Math.floor(secondLeft/60);
+  var seconds = Math.floor(secondLeft%60);
+  var timeString = '';
+  if(minutes > 1){
+    timeString = `${minutes}:${seconds} Minutes`
+  } else {
+      timeString = `${seconds} Seconds`
+  }
+
+
   if(Math.floor(player.getDuration() - player.getCurrentTime())== 0){
     gamification = 'FINISH!'
     timeleft.innerText = `${gamification}`;
   }
   else if(precetage < 25){
     gamification = ', You almost done!'
-    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+    timeleft.innerText = `${timeString} ${gamification}`;
   }
   else if(precetage < 50){
     gamification = ', Half is passed!'
-    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+    timeleft.innerText = `${timeString} ${gamification}`;
   }
   else if(precetage < 75){
     gamification = ', Good Job!'
-    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+    timeleft.innerText = `${timeString} ${gamification}`;
   } else {
     gamification = ' Left'
-    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+    timeleft.innerText = `${timeString} ${gamification}`;
   }
   var load = document.getElementById('load');
   load.style.width = `${precetage}%`
