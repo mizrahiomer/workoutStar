@@ -26,7 +26,7 @@ function onPlayIsReady(event) {
       if(isAdmin()){
         socket.emit('updateCurrentTime',{currentTime: player.getCurrentTime()});
       }
-      var precetage = (player.getDuration() - player.getCurrentTime())/player.getDuration()*100;
+      var precetage = (player.getDuration() - player.getCurrentTime())/player.getDuration()*95;
       precetage += 5;
       updateLoadBar(precetage);
     },1000)
@@ -46,13 +46,25 @@ function onPlayIsReady(event) {
 function updateLoadBar(precetage){
   var timeleft = document.getElementById('timeleft');
   var gamification = '';
-  if(precetage < 50){
+  if(Math.floor(player.getDuration() - player.getCurrentTime())== 0){
+    gamification = 'FINISH!'
+    timeleft.innerText = `${gamification}`;
+  }
+  else if(precetage < 25){
+    gamification = ', You almost done!'
+    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+  }
+  else if(precetage < 50){
     gamification = ', Half is passed!'
+    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
   }
   else if(precetage < 75){
     gamification = ', Good Job!'
+    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
+  } else {
+    gamification = ' Left'
+    timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
   }
-  timeleft.innerText = `${Math.floor(player.getDuration() - player.getCurrentTime())} Seconds${gamification}`;
   var load = document.getElementById('load');
   load.style.width = `${precetage}%`
 }
@@ -76,8 +88,6 @@ function loadPlayer(videoId) {
 
 function onYouTubePlayer(videoId) {
     player = new YT.Player('player', {
-        height: '390',
-        width: '640',
         videoId: videoId,
         events: {
           'onStateChange': onPlayerStateChange,
