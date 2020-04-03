@@ -1,55 +1,54 @@
-const {Users} = require('../utils/users.js');
-const {Video} = require('../utils/video.js');
+const {Workouts} = require('../utils/workouts.js');
 
-var users = new Users();
-var video = new Video();
+var workouts = new Workouts();
 
 const workout_connection = function (io) {
-    console.log('user join')
     io.on('connection', (socket) => {
+
         socket.on('join',(params,callback) => {
           socket.join(params.sessionid);
-          users.removeUser(socket.id);
-          users.addUser(socket.id,params.admin,params.sessionid);
-          console.log(video.status)
-          if(video.status == 'play'){
-            console.log(video.timestemp)
-            socket.emit('playVideoFromServer',{currentTime: video.timestemp})
+          var session = workouts.getSession(params.sessionid);
+          if(!session){
+            session = workouts.addSession(params.sessionid);
           }
+          session.removeUser(socket.id);
+          session.addUser(socket.id,params.admin);
         });
-      
-        socket.on('disconnect', () => {
-          var user = users.removeUser(socket.id);
-          console.log('User has leaved ');
-        });
-      
       
         socket.on('stopVideo', (params,callback) => {
-          var user = users.getUser(socket.id);
-          if(user.admin){    
-            video.setStatus('pause');
-            video.setTime(params.currentTime)
-            io.to(user.room).emit('stopVideoFromServer');
+          var {sessionid} = params;
+          var session = workouts.getSession(sessionid);
+          var user = session.getUser(socket.id);
+          if(user.admin){
+            io.to(sessionid).emit('stopVideoFromServer');
           }
         });
       
         socket.on('playVideo', (params,callback) => {
-          var user = users.getUser(socket.id);
+          var {sessionid} = params;
+          var session = workouts.getSession(sessionid);
+          var user = session.getUser(socket.id);
           if(user.admin){
-            console.log('play')
-            video.setStatus('play');
-            video.setTime(params.currentTime)
-          }
-          io.to(user.room).emit('playVideoFromServer');
-        })
-      
-        socket.on('updateCurrentTime',(params,callback) => {    
-          var user = users.getUser(socket.id);
-          if(user && user.admin){
-            video.setTime(params.currentTime)
+            io.to(sessionid).emit('playVideoFromServer');
           }
         })
       
+
+              
+        socket.on('praiseAll', (params,callback) => {
+          var {sessionid,word} = params;
+          io.to(sessionid).emit('praiseAllFromServer',{word});
+        })
+      
+
+
+        socket.on('disconnect', () => {
+          var session = workouts.findUserSession(socket.id);
+          if(session){
+            session.removeUser(socket.id);
+          }
+        });
+
       });
       
 }

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body{
   margin: auto 0;
@@ -138,29 +139,7 @@ nav .participent-card{
   flex: 0;
 }
 
-#btns audio{
-  background-color: #f1f3f4;
-  overflow: hidden;
-  border-top-right-radius: 5rem;
-  border-bottom-right-radius: 5rem;
-}
 
-#copyBtn{
-  padding: 0.5rem 1rem;
-  background-color: #0bb3a3;
-  border-radius: 0.5rem;
-  border: 0px;
-  color: #055951;
-  cursor: pointer;
-  color: white;
-  font-size: 0.9rem;
-  margin: auto;
-  display: block;
-}
-
-#copyBtn:hover{
-  background-color: #26a69a;
-}
 
 
 nav.close #toggle-nav{
@@ -234,15 +213,138 @@ nav.close #toggle-nav{
 
 #share-facebook{
   float: right;
-  padding: 0.5rem 0.70rem;
-  height: 2rem;
+  padding: 0.4rem 0.70rem;
   background-color: #385898;
   border-radius: 0.5rem;
   border: 0px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
   cursor: pointer;
-  font-weight: bold;
   margin: 0.65rem;
   
+}
+#share-facebook span {
+  padding-right: 0.5rem;
+}
+
+#copyBtn{
+  float: right;
+  padding: 0.4rem 0.70rem;
+  background-color: #0bb3a3;
+  border-radius: 0.5rem;
+  border: 0px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  margin: 0.65rem;
+  margin-right: -0.3rem;
+}
+
+.sharebutton{
+  overflow: hidden;
+  max-width: 2rem;
+  height: 2rem;
+  transition: all 1s;
+  white-space: nowrap;
+}
+
+.sharebutton span{
+  display: none;
+  opacity: 0;
+}
+
+
+.sharebutton:hover{
+  background-color: #26a69a;
+  max-width: 20rem;
+  transition: all 1s;
+
+}
+
+.sharebutton:hover span {
+  animation-name: botton;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.1s;
+  display: inline-flex;
+  overflow: hidden;
+
+}
+
+#audiobutton {
+  background-color: #26a69a;
+  border: 0px;
+  background-color: #f1f3f4;
+  overflow: hidden;
+  border-top-right-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+  width: 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+
+#audiobutton:hover{
+  background-color: #eaeaea;
+}
+
+#audiobutton.mute{
+  color: #b9b9b9;
+}
+
+#prais-message{
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%);
+  color: red;
+  z-index: 1000;
+  display: none;
+  font-family: 'Fredoka One', cursive;
+
+}
+
+#prais-message.active{
+  opacity: 0;
+  display: inline-block;
+  animation-name: show_animation;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+#parise-button {
+  margin: auto;
+  background: none;
+  border: 0;
+  outline: none;
+  display: block;
+  background-color: #26a69a;
+  /* border-radius: 50%;
+  overflow: hidden;
+  height: 3.8rem;
+  width: 3.8rem; */
+  border-radius: 5px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+#parise-button:hover{
+  opacity: 0.8;
+}
+
+#parise-button img{
+  height: 3rem;
+
+}
+
+@keyframes botton {
+  from {display: none; opacity: 0;}
+  to {display: inline-block; opacity: 1;}
+}
+
+
+@keyframes show_animation {
+  from {opacity: 0; top: 70%;transform: scale(1);}
+  to {opacity: 1; top: 50%;transform: scale(5);}
 }
