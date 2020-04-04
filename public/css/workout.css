@@ -323,7 +323,7 @@ nav.close #toggle-nav{
   cursor: pointer;
   transform: rotate(-1deg);
   color: white;
-  font-weight: bold;
+  font-size:1.3rem;
   width:85%;
 }
 
