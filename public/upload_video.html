@@ -2,19 +2,7 @@
 <html lang="en">
 
 <head>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-  <script src="/js/libs/jquery-3.3.1.min.js"></script>
-  <script>
-    function start() {
-      gapi.load("auth2", function () {
-        auth2 = gapi.auth2.init({
-          client_id:
-            "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com"
-        });
-      });
-    }
-  </script>
+ 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
@@ -27,12 +15,6 @@
 
   <div id="wrapper">
     <div class="mx-auto col-6 border m-4 py-2 px-4 shadow rounded animated slideInDown" id="form-wrapper">
-      <div class="text-center">
-        <button id="signinButton" class="btn btn-lg btn-danger shadow mx-auto my-5">
-          Sign in with Google <i class="fab fa-google"></i>
-        </button>
-      </div>
-
       <div id="video-upload">
         <div class="text-center h1 m-0">Video Upload</div>
         <div class="form-group">
@@ -76,13 +58,9 @@
       </div>
     </div>
   </div>
+  <script src="/js/libs/jquery-3.3.1.min.js"></script>
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
@@ -91,11 +69,12 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript">
     $(document).ready(function () {
+  
       $("#continue").prop("disabled", true);
       $("#video-id").keyup(function () {
         $("#continue").prop("disabled", this.value == "" ? true : false);
       });
-      //  $('#video-upload').hide();
+   
     });
   </script>
   <script>
@@ -109,6 +88,8 @@
     };
     const getVideoDetails = () => {
       const videoId = $("#video-id").val();
+      const userId = localStorage.getItem('userId')
+      console.log('localStorage' +userId)
       const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
       const type = $("#video-type").val();
       const equipment = $(
@@ -118,6 +99,7 @@
       videoObj = {
         ...videoObj,
         videoId,
+        userId,
         equipment,
         type
       };
@@ -165,7 +147,7 @@
       <input type="text" class="form-control" id="video-title" />
       <div>
       <div class="form-group"><label class="h5 mt-1" for="video-duration">Video Duration</label>
-      <input type="text" class="form-control" id="video-duration" />
+      <input disabled type="text" class="form-control" id="video-duration" />
       <div>
       <div class="form-group"><label class="h5 mt-1" for="video-url">Video Url</label>
       <input type="text" class="form-control" id="video-url" />
@@ -190,7 +172,6 @@
       videoObj = {
         ...videoObj,
         title,
-        duration,
         url,
         img
       };
@@ -202,43 +183,40 @@
     };
 
 
-    $("#signinButton").click(function () {
-      // signInCallback defined in step 6.
+    // $("#signinButton").click(function () {
+    //   // signInCallback defined in step 6.
 
-      auth2.grantOfflineAccess().then(signInCallback);
-    });
+    //   auth2.grantOfflineAccess().then(signInCallback);
+    // });
 
-    function signInCallback(authResult) {
-      if (authResult["code"]) {
-        // Hide the sign-in button now that the user is authorized, for example:
-        $("#signinButton").attr("style", "display: none");
-        $("#video-upload").show();
+    // function signInCallback(authResult) {
+    //   if (authResult["code"]) {
+    //     // Hide the sign-in button now that the user is authorized, for example:
+    //     $("#signinButton").attr("style", "display: none");
+    //     $("#video-upload").show();
 
-        const userName = auth2.currentUser
-          .get()
-          .getBasicProfile()
-          .getName();
+    //     const userName = auth2.currentUser
+    //       .get()
+    //       .getBasicProfile()
+    //       .getName();
 
-        const userId = auth2.currentUser.get().getId();
-        const userEmail = auth2.currentUser
-          .get()
-          .getBasicProfile()
-          .getEmail()
+    //     const userId = auth2.currentUser.get().getId();
+    //     const userEmail = auth2.currentUser
+    //       .get()
+    //       .getBasicProfile()
+    //       .getEmail()
 
-        const userObj = {
-          userId,
-          userName,
-          userEmail
-        }
-        videoObj = {
-          ...videoObj,
-          userId,
-        };
-        $.post('/user', userObj, function (response) {
-          console.log(JSON.parse(response))
-        }, 'application/json')
-      }
-    }
+    //     const userObj = {
+    //       userId,
+    //       userName,
+    //       userEmail
+    //     }
+    
+    //     $.post('/user', userObj, function (response) {
+    //       console.log(JSON.parse(response))
+    //     }, 'application/json')
+    //   }
+    // }
   </script>
 </body>
 </html>
