@@ -1,6 +1,4 @@
-const fs = require('fs');
 const multer = require('multer');
-const path = require('path');
 
 const fileFilter = (req, files, cb) => {
     if (files.mimetype === 'image/jpeg' || files.mimetype === 'image/png') {

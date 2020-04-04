@@ -12,6 +12,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
+    <script src="/js/libs/mustache.js"></script>
     <script>
       function start() {
         gapi.load("auth2", function () {
@@ -321,7 +322,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 data-toggle="gridalicious"
                 data-width="250"
               >
-                               <div class="panel panel-default">
+                <script id="session-panel" type="text/template">
+                
+                </script>
+                <div class="panel panel-default">
                   <div class="cover overlay hover cover-image-full">
                     <img
                       src="images/placeholder.jpg"
@@ -364,7 +368,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <h4 class="margin-none"><a href="">The Voyager</a></h4>
                     <span class="text-grey-500">In Style</span>
                   </div>
-                </div>    <div class="panel panel-default">
+                </div>    
+                <div class="panel panel-default">
                   <div class="cover overlay hover cover-image-full">
                     <img
                       src="images/placeholder.jpg"
