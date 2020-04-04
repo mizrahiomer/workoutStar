@@ -6,34 +6,48 @@ const workout_connection = function (io) {
     io.on('connection', (socket) => {
 
         socket.on('join',(params,callback) => {
-          socket.join(params.sessionid);
-          var session = workouts.getSession(params.sessionid);
+          const {sessionid} = params;
+          socket.join(sessionid);
+          var session = workouts.getSession(sessionid);
           if(!session){
-            session = workouts.addSession(params.sessionid);
+            session = workouts.addSession(sessionid);
           }
           session.removeUser(socket.id);
-          session.addUser(socket.id,params.admin);
-        });
-      
-        socket.on('stopVideo', (params,callback) => {
-          var {sessionid} = params;
-          var session = workouts.getSession(sessionid);
-          var user = session.getUser(socket.id);
-          if(user.admin){
-            io.to(sessionid).emit('stopVideoFromServer');
+          var user = session.addUser(socket.id,params.admin);
+          if(!user){
+            socket.emit('error', {code: 0, message: 'There is already admin in this room'});
+          } else {            
+            if(!user.admin){
+              socket.emit('updateVideoFromServer',{
+                current_time: session.getTime(),
+                state: session.getState()
+              });
+            }
           }
+
         });
-      
-        socket.on('playVideo', (params,callback) => {
-          var {sessionid} = params;
+            
+        socket.on('updateVideoStateAndTime', (params,callback) => {
+          var {sessionid,current_time,state} = params;
+          console.log(sessionid,current_time,state)
           var session = workouts.getSession(sessionid);
-          var user = session.getUser(socket.id);
-          if(user.admin){
-            io.to(sessionid).emit('playVideoFromServer');
+          if(session){
+            var user = session.getUser(socket.id);
+            if(user.admin){
+              if(!state) state = session.getState();
+              session.setState(state).setTime(current_time);
+              socket.broadcast.to(sessionid).emit('updateVideoFromServer',{current_time,state});
+            }
           }
         })
       
-
+        socket.on('updateVideoTime',(params,callback) => {
+          var {sessionid,time} = params;
+          var session = workouts.getSession(sessionid);
+          if(session){
+            session.setTime(time)
+          }
+        })
               
         socket.on('praiseAll', (params,callback) => {
           var {sessionid,word} = params;
