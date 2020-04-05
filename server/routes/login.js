@@ -56,8 +56,9 @@ const login_route = function(express,conn) {
     router.post('/videoupload', (req, res) => {
         var post ={
             videoId: req.body.videoId,
-            equipment: req.body.equipment,
             type: req.body.type,
+            mat:req.body.mat,
+            dumbbell:req.body.dumbbell,
             title: req.body.title,
             duration: req.body.duration,
             length: req.body.length,
@@ -72,9 +73,10 @@ const login_route = function(express,conn) {
                 console.log(err);
                 res.status(500).send({ success: false, msg: 'video was not created' });
             } else {
-
-                res.cookie('tokenid', createToken({ id: req.body.id, createdAt: new Date() }), { maxAge: 86400 * 1000 });
-                res.send({ success: true, redirectToUrl: '/index.html' });
+               console.log(data);    
+                res.cookie('tokenid', createToken({ id: req.body.videoId, createdAt: new Date() }), { maxAge: 86400 * 1000 });
+                //res.send({ success: true, msg:'Ýour video was uploaded' });
+                res.send('Your video was uploaded!');
             }
         });
     })
