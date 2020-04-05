@@ -1,49 +1,4 @@
-const videos = [
-  {
-    videoId: 'g67ggjh9',
-    equipment: 'No equipment',
-    type: 'Yoga',
-    title: 'Test',
-    duration: '00:03:15',
-    length: 'S',
-    url: '#',
-    img: 'images/placeholder.jpg',
-    userId: '7218hfjisa'
-  },
-  {
-    videoId: 'g67ggjh9',
-    equipment: 'No equipment',
-    type: 'Yoga',
-    title: 'Test',
-    duration: '00:03:15',
-    length: 'S',
-    url: '#',
-    img: 'images/placeholder.jpg',
-    userId: '7218hfjisa'
-  },
-  {
-    videoId: 'g67ggjh9',
-    equipment: 'No equipment',
-    type: 'Yoga',
-    title: 'Test',
-    duration: '00:03:15',
-    length: 'S',
-    url: '#',
-    img: 'images/placeholder.jpg',
-    userId: '7218hfjisa'
-  },
-  {
-    videoId: 'g67ggjh9',
-    equipment: 'No equipment',
-    type: 'Yoga',
-    title: 'Test',
-    duration: '00:03:15',
-    length: 'S',
-    url: '#',
-    img: 'images/placeholder.jpg',
-    userId: '7218hfjisa'
-  },
-]
+const videos = [];
 
 //Here is the magic!
 function addVideoToPanel(video){
@@ -57,11 +12,20 @@ function addVideoToPanel(video){
   jQuery('#video-container').append(html);
 }
 
-
-$(document).ready(function() {
-  videos.forEach(function(video){
-    addVideoToPanel(video);
+function fetchVideos() {
+  const ids = videos.join();
+  console.log(ids);
+  $.get(`/videos/all?alreadyIn=${ids}`,function(data){
+    data.forEach(function(video){
+      videos.push(video.videoId);
+      addVideoToPanel(video)
+    })
+  }).fail(function(error){
+    console.log(error.responseText)
   })
+}
+$(document).ready(function() {
+  fetchVideos();
 })
 
 
