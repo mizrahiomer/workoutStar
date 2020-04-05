@@ -7,6 +7,8 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const busboy = require("then-busboy");
+const mysql = require('mysql');
+const dbConfigs = require('./utils/dbconfigs');
 
 const port = process.env.PORT || 3000;
 
@@ -16,12 +18,17 @@ var io = socketIO(server),
 workout_connection = require('./routes/workout_connection')(io);
 var navigation_routes = require('./routes/navigation');
 var uploads = require('./routes/upload');
-const login= require('./routes/login');
+var login_route = require('./routes/login');
+var video_route = require('./routes/video_route');
+
 
 var corsOptions ={
   origin:'http://localhost:3000',
      credentials: true
 };
+
+
+const conn = mysql.createPool(dbConfigs);
 
 
 
@@ -33,7 +40,8 @@ app.use('/',express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/fileupload',uploads(express))
-app.use(login.router);
+app.use('/videos',video_route(express,conn))
+app.use('/',login_route(express, conn));
 // app.use('/',navigation_routes(app,express))
 
 
