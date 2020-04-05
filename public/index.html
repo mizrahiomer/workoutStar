@@ -73,7 +73,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-              <li><a href="./upload_video.html">Upload</a></li>
+              <li id='upload-video'><a href="./upload_video.html">Upload</a></li>
               <li>  
                 <a id="signinButton" style="cursor:pointer;">
                 Sign in with Google <i class="fa fa-google"></i>
@@ -224,17 +224,43 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script>
-
+      $( document ).ready(function() { 
+        $("#upload-video").hide() 
+        console.log('localStorage' + localStorage.getItem('userId'))
+        if(localStorage.getItem('userId') == null){
+          $("#signinButton").click(function () {
+            auth2.grantOfflineAccess().then(signInCallback)
+        })
+        $("#signinButton").html("Sign in with Google <i class='fa fa-google'></i>");
+        $("#upload-video").hide()
+      }else{
+        $("#signinButton").click(function () {
+          auth2.signOut().then(()=>{
+            localStorage.removeItem('userId')
+          })
+        }) 
+        $("#signinButton").html("Sign Out");
+        $("#upload-video").show();
+      }
+      });
       $("#signinButton").click(function () {
-    
-
-      auth2.grantOfflineAccess().then(signInCallback);
-    });
-
+        if(localStorage.getItem('userId') == null){
+          auth2.grantOfflineAccess().then(signInCallback)
+        }else{
+        auth2.signOut().then(()=>{
+          $("#signinButton").html("Sign in with Google <i class='fa fa-google'></i>");
+          $("#upload-video").hide();
+          localStorage.removeItem('userId');
+        })
+        }
+        })
+  
     function signInCallback(authResult) {
       if (authResult["code"]) {
         // Hide the sign-in button now that the user is authorized, for example:
-        $("#signinButton").attr("style", "display: none");
+        $("#signinButton").html("Sign Out");
+        $("#upload-video").show()
+
         const userName = auth2.currentUser
           .get()
           .getBasicProfile()
