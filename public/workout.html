@@ -16,10 +16,10 @@
       <div id="participents-list">
 
       </div>
-      <button id="parise-button" onclick="sendPraise()">
-          <!-- <img src="./images/cheerleader.svg" alt="cheer"/> -->
-          Cheer Ups!
-      </button>
+        <button id="parise-button" onclick="sendPraise()">
+          <img src="./images/cheerleader.svg" alt="cheer"/>
+          <span>Cheer Ups!</span>
+        </button>  
     </nav>
     <div id="global-message">
 
@@ -34,9 +34,11 @@
           <source src="./music/Workout Mix 2019  Fitness  Gym Motivation.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
-        <button onclick="toggelAudio()" id="audiobutton" class="mute">
-          <i class="fas fa-volume-mute"></i>
+        <div id="audiobutton"  class="mute">
+        <button onclick="toggelAudio()" class="innerbutton">
+            <i class="fas fa-volume-mute"></i>
         </button>
+        </div>
         <div style="width: 50%;">
           <button id="audio-button" class="stream-control" onclick="toggleAudio()">
               <i class="fas fa-microphone"></i>
@@ -45,10 +47,10 @@
               <i class="fas fa-video"></i>
           </button>
           <button id="share-facebook" class="sharebutton" onclick="shareOnFacebook()">
-            <span>Share on Facebook</span><i class="fab fa-facebook-f"></i>
+            <span>Share on </span><i class="fab fa-facebook-f"></i>
           </button>
           <button id="copyBtn" class="sharebutton" onclick="copyUrl()">
-            <span>Get link to share</span> <i class="far fa-copy"></i>
+            <span>Get link </span> <i class="far fa-copy"></i>
           </button>    
         </div>
       </div>
@@ -113,12 +115,16 @@
         var audioplayer = document.querySelector('audio');
         if(!audioplayer.paused){
           $('#audiobutton').addClass('mute')
+          $('#audiobutton').removeClass('audio1')
           audioplayer.pause();
-          $('#audiobutton').html('<i class="fas fa-volume-mute"></i>')
+          $('#audiobutton .innerbutton').removeClass('audio2')
+          $('#audiobutton .innerbutton').html('<i class="fas fa-volume-mute"></i>')
         } else {
           audioplayer.play()
           $('#audiobutton').removeClass('mute')
-          $('#audiobutton').html('<i class="fas fa-volume-up"></i>')
+          $('#audiobutton').addClass('audio1')
+          $('#audiobutton .innerbutton').addClass('audio2')
+          $('#audiobutton .innerbutton').html('<i class="fas fa-volume-up"></i>')
         }
 
       }

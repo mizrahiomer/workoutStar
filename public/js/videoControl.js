@@ -4,8 +4,8 @@ var player;
 var praiseShown = false;
 var lockScreen = false;
 
-var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'Almust there', 'Yeaaaa!']
-
+var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'Almust there', 'Yeaaaa!', 'Have Fun!', 'You can Do It :-)']
+var randomPraiseClass = ['random1','random2','random3','random4','random5','random6','random7'];
 socket.on('connect', function () {});
 
 function onPlayerStateChange(event){
@@ -13,7 +13,7 @@ function onPlayerStateChange(event){
   var { sessionid } = params;
   if(!lockScreen){
     if (isAdmin() && (event.data == 1 || event.data == 2)) {
-      socket.emit('updateVideoStateAndTime',{ 
+      socket.emit('updateVideoStateAndTime',{
         sessionid,
         current_time: player.getCurrentTime(),
         state: event.data
@@ -41,7 +41,7 @@ function onPlayIsReady(event) {
   var {sessionid,admin} = params
   socket.emit('join',{ sessionid,admin },function(err){});
   updateLoadBar();
-  
+
   setInterval(function(){
     updateLoadBar();
     if(isAdmin()){
@@ -80,17 +80,21 @@ function onPlayIsReady(event) {
 
 function showPraise(duration,word){
   var praise = document.getElementById('prais-message');
+  var value = Math.floor(Math.random() * randomPraiseClass.length);
+  var praiseClass = randomPraiseClass[value];
   praise.innerText = word;
   praise.classList.add('active')
+  praise.classList.add(praiseClass);
   praiseShown = true;
   setTimeout(function(){
     praise.classList.remove('active')
+    praise.classList.remove(praiseClass);
     praiseShown = false;
   },duration)
 }
 
 function playVideoWithCount(){
-  
+
   setTimeout(function(){
     showPraise(800,'3')
   },0)
@@ -128,17 +132,17 @@ function updateLoadBar(){
   }
 
   var precetage = secondLeft/player.getDuration()*95;
-  console.log(precetage) 
+  console.log(precetage)
   if(Math.floor(player.getDuration() - player.getCurrentTime())== 0){
     gamification = 'FINISH!'
     timeleft.innerText = `${gamification}`;
   }
   else if(precetage < 25){
-    gamification = ', You almost done!'
+    gamification = ', You Almost Done!'
     timeleft.innerText = `${timeString} ${gamification}`;
   }
   else if(precetage < 50){
-    gamification = ', Half is passed!'
+    gamification = ', Half Way There!'
     timeleft.innerText = `${timeString} ${gamification}`;
   }
   else if(precetage < 75){
@@ -178,7 +182,7 @@ function onYouTubePlayer(videoId) {
           'onReady': onPlayIsReady
         }
     });
-  
+
 }
 
 function isAdmin(){
@@ -190,7 +194,7 @@ function isAdmin(){
 function sendPraise(){
   if(!praiseShown){
     var params = deparam(window.location.search);
-    var value = Math.floor(Math.random() * randomParise.length); 
+    var value = Math.floor(Math.random() * randomParise.length);
     socket.emit('praiseAll',{sessionid: params.sessionid,word: randomParise[value]});
   }
 }
@@ -203,3 +207,15 @@ $(document).ready( function() {
     $('#cover').css('display', 'none')
   }
 });
+
+
+// var videos = [];
+
+
+
+// var types = ['type1','type2', 'type3'];
+// var mat = false;
+// var dumbbell = true;
+
+// const videoToDisplay =videos.filter(
+//   video => types.includes(video.type) && video.mat == mat && video.dumbbell == dumbbell);
