@@ -76,7 +76,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-              <li id='upload-video'><a href="./upload_video.html">Add a Video</a></li>
+              <li id='upload-video'><a href="./upload_video.html">Add a Video <i class='fa fa-film'></i></a></li>
               <li>  
                 <a id="signinButton" style="cursor:pointer;">
                 Add a Video 
@@ -233,7 +233,7 @@
           $("#signinButton").click(function () {
             auth2.grantOfflineAccess().then(signInCallback)
         })
-        $("#signinButton").html("Add a Video</i>");
+        $("#signinButton").html("Add a Video <i class='fa fa-film'></i>");
         $("#upload-video").hide()
       }else{
         $("#signinButton").click(function () {
@@ -241,7 +241,7 @@
             localStorage.removeItem('userId')
           })
         }) 
-        $("#signinButton").html("Sign Out");
+        $("#signinButton").html("Sign Out <i class='fa fa-sign-out'></i>");
         $("#upload-video").show();
       }
       });
@@ -250,7 +250,7 @@
           auth2.grantOfflineAccess().then(signInCallback)
         }else{
         auth2.signOut().then(()=>{
-          $("#signinButton").html("Sign in with Google <i class='fa fa-google'></i>");
+          $("#signinButton").html("Add a Video <i class='fa fa-film'></i>");
           $("#upload-video").hide();
           localStorage.removeItem('userId');
         })
@@ -259,9 +259,8 @@
   
     function signInCallback(authResult) {
       if (authResult["code"]) {
-        // Hide the sign-in button now that the user is authorized, for example:
-        $("#signinButton").html("Sign Out");
-        $("#upload-video").show()
+        
+        $("#signinButton").html("Sign Out <i class='fa fa-sign-out'></i>");
 
         const userName = auth2.currentUser
           .get()
@@ -284,6 +283,7 @@
         $.post('/user', userObj, function (response) {
           console.log(JSON.parse(response))
         }, 'application/json')
+        window.location.href = "./upload_video.html";
       }
     }
   </script>
