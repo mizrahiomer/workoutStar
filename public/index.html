@@ -28,7 +28,11 @@
     <link href="css/vendor/all.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" /> <!--This is the relevant css-->
     <link href="css/app/app.css" rel="stylesheet" />
-
+    <style>
+      li{
+        list-style-type: none;
+      }
+    </style>
   </head>
   <body>
     <!-- Wrapper required for sidebar transitions -->
@@ -143,7 +147,7 @@
         <div data-scrollable>
           <h4 class="category">Workout Type</h4>
           <ul
-            class="sidebar-block list-group list-group-menu list-group-minimal"
+          id='type' class="sidebar-block list-group list-group-menu list-group-minimal" 
           >
             <li class="list-group-item" style='cursor: pointer;' id='All'>
               <a 
@@ -184,7 +188,7 @@
 
           <h4 class="category">Duration</h4>
           <ul
-            class="sidebar-block list-group list-group-menu list-group-minimal"
+            id='duration'class="sidebar-block list-group list-group-menu list-group-minimal"
           >
             <li class="list-group-item" style='cursor: pointer;' id='Short'>
               <a
@@ -204,7 +208,7 @@
           </ul>
           <h4 class="category">Equipment</h4>
           <ul
-            class="sidebar-block list-group list-group-menu list-group-minimal"
+          id='equipment' class="sidebar-block list-group list-group-menu list-group-minimal"
           >
             <li class="list-group-item" style='cursor: pointer;' id='No Equipment'>
               <a
@@ -241,35 +245,11 @@
             <div class="container-fluid">
               <h2>Discover</h2>
               <ul
-                id='video-container'
+                id='videos-container'
                 class="row gridalicious"
                 data-toggle="gridalicious"
                 data-width="250"
               >
-              <script id="video-panel-template" type="text/template">
-                <li class="panel panel-default">
-                  <div class="cover overlay hover cover-image-full">
-                    <img
-                      src="{{img}}"
-                      alt="music"
-                    />
-                    <div
-                      class="overlay overlay-full overlay-hover overlay-bg-black"
-                    >
-                      <div class="v-center">
-                        <a href="" class="btn btn-lg btn-circle btn-white">
-                          <i class="fa fa-play"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <h4 class="card-title"><a href="">{{title}}</a></h4>
-                    <span class="text-grey-500">{{type}}</span>
-                  </div>
-                </li>                    
-              </script>
-
 
               <div style="clear: both;"></div>
           
@@ -315,20 +295,9 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script>
-      
-    $(document).ready(function () {
-    });
 
-      $('.list-group-item a').click(function(){
-       const id= $(this).parent().attr("id");
-        if($('#'+id).hasClass('active')){
-          $('#'+id).removeClass('active')
-        }else{
-          $('#'+id).addClass('active')
-        }
-      })
       $("#signinButton").click(function () {
-      // signInCallback defined in step 6.
+    
 
       auth2.grantOfflineAccess().then(signInCallback);
     });
@@ -421,5 +390,29 @@
     <!-- <script src="js/app/charts/easy-pie.js"></script> -->
     <!-- <script src="js/app/charts/morris.js"></script> -->
     <!-- <script src="js/app/charts/sparkline.js"></script> -->
+    <script id="video-panel-template" type="text/template">
+      <li class="panel panel-default">
+        <div class="cover overlay hover cover-image-full">
+          <img
+            src="{{img}}"
+            alt="music"
+          />
+          <div
+            class="overlay overlay-full overlay-hover overlay-bg-black"
+          >
+            <div class="v-center">
+              <a href="" class="btn btn-lg btn-circle btn-white">
+                <i class="fa fa-play"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h4 class="card-title"><a href="">{{title}}</a></h4>
+          <span class="text-grey-500">{{type}}</span>
+        </div>
+      </li>                    
+    </script>
+
   </body>
 </html>
