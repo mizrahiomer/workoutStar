@@ -4,7 +4,7 @@ var player;
 var praiseShown = false;
 var lockScreen = false;
 
-var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'Almust there', 'Yeaaaa!', 'Have Fun!', 'You can Do It :-)']
+var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'Almost there', 'Yeaaaa!', 'Have Fun!', 'You can Do It :-)']
 var randomPraiseClass = ['random1','random2','random3','random4','random5','random6','random7'];
 socket.on('connect', function () {});
 
