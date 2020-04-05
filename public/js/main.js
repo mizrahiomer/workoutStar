@@ -42,8 +42,19 @@ function addVideoToPanel(video){
     img:video.img,
     title:video.title,
     type:video.type,
+    link: `https://sleepy-beyond-48017.herokuapp.com/workout.html?sessionid=${generateSession(8)}=&videoid=${video.videoId}`
   });
   jQuery('#videos-container').append(html);
+}
+
+function generateSession(length){
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 
 function fetchVideos() {

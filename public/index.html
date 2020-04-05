@@ -80,7 +80,7 @@
                 </a>
               </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right ">
+            <ul class="nav navbar-nav navbar-right " style="display: none;">
               <div class="wizard-1" id="wizard-demo-1" >
                 <div data-scrollable-h>
                   <ul class="wiz-progress" >
@@ -327,9 +327,7 @@
             src="{{img}}"
             alt="music"
           />
-          <div
-            class="overlay overlay-full overlay-hover overlay-bg-black"
-          >
+          <div class="overlay overlay-full overlay-hover overlay-bg-black">
             <div class="v-center">
               <a href="" class="btn btn-lg btn-circle btn-white">
                 <i class="fa fa-play"></i>
@@ -338,7 +336,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <h4 class="card-title"><a href="">{{title}}</a></h4>
+          <h4 class="card-title"><a href={{link}} target="_blacnk">{{title}}</a></h4>
           <span class="text-grey-500">{{type}}</span>
         </div>
       </li>                    
