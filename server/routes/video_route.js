@@ -10,7 +10,7 @@ const navigation_routes = function(express,conn) {
         if(!alreadyIn) alreadyIn = '';
         else alreadyIn = `WHERE videoId NOT IN (${alreadyIn})`;
 
-        var sql = 'SELECT videoId, title, img,type FROM videos '+alreadyIn+' LIMIT 25';
+        var sql = 'SELECT videoId, title, img, type, mat, dumbbell, length FROM videos '+alreadyIn+' LIMIT 25';
         conn.query(sql,(err,rows) => {
             if(err){
                 console.log(err)
