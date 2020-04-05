@@ -14,7 +14,6 @@ function addVideoToPanel(video){
 
 function fetchVideos() {
   const ids = videos.join();
-  console.log(ids);
   $.get(`/videos/all?alreadyIn=${ids}`,function(data){
     data.forEach(function(video){
       videos.push(video.videoId);
