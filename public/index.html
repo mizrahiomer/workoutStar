@@ -146,85 +146,14 @@
       >
         <div data-scrollable>
           <h4 class="category">Workout Type</h4>
-          <ul
-          id='type' class="sidebar-block list-group list-group-menu list-group-minimal" 
-          >
-            <li class="list-group-item" style='cursor: pointer;' id='All'>
-              <a 
-                ><span class="badge pull-right"></span> All</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Yoga'>
-              <a 
-                ><span class="badge pull-right"></span> Yoga</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='HIIT'>
-              <a 
-                ><span class="badge pull-right"></span> HIIT</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Pilates'>
-              <a 
-                ><span class="badge pull-right"></span> Pilates</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Cardio'>
-              <a 
-                ><span class="badge pull-right"></span> Cardio</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Strength'>
-              <a 
-                ><span class="badge pull-right"></span> Strength</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Toning'>
-              <a 
-                ><span class="badge pull-right"></span> Toning</a
-              >
-            </li>
+          <ul id='type' class="sidebar-block list-group list-group-menu list-group-minimal" >
           </ul>
 
           <h4 class="category">Duration</h4>
-          <ul
-            id='duration'class="sidebar-block list-group list-group-menu list-group-minimal"
-          >
-            <li class="list-group-item" style='cursor: pointer;' id='Short'>
-              <a
-                ><span class="badge pull-right"> &lt; 30min </span> Short</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Medium'>
-              <a 
-                ><span class="badge pull-right">30m-60m</span> Medium</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Long'>
-              <a 
-                ><span class="badge pull-right">&gt; 60min</span> Long</a
-              >
-            </li>
+          <ul id='duration'class="sidebar-block list-group list-group-menu list-group-minimal">
           </ul>
           <h4 class="category">Equipment</h4>
-          <ul
-          id='equipment' class="sidebar-block list-group list-group-menu list-group-minimal"
-          >
-            <li class="list-group-item" style='cursor: pointer;' id='No Equipment'>
-              <a
-                ><span class="badge pull-right"></span> No Equipment</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Mat'>
-              <a 
-                ><span class="badge pull-right"></span> Mat</a
-              >
-            </li>
-            <li class="list-group-item" style='cursor: pointer;' id='Dumbbell'>
-              <a 
-                ><span class="badge pull-right"></span> Dumbbell</a
-              >
-            </li>
+          <ul id='equipment' class="sidebar-block list-group list-group-menu list-group-minimal">
           </ul>
         </div>
       </div>
@@ -322,6 +251,7 @@
           userName,
           userEmail
         }
+
         localStorage.setItem('userId',userId)
         $.post('/user', userObj, function (response) {
           console.log(JSON.parse(response))
@@ -413,6 +343,20 @@
         </div>
       </li>                    
     </script>
-
+    <script id="list-types" type="text/template">
+      <li class="list-group-item type-element" style='cursor: pointer;' id={{type}}>
+        <a><span class="badge pull-right"></span> {{type}}</a>
+      </li>
+    </script>
+    <script id="list-equipment" type="text/template">
+      <li class="list-group-item equipment-element" style='cursor: pointer;' id={{id}}>
+        <a><span class="badge pull-right"></span> {{label}}</a>
+      </li>
+    </script>
+    <script id="list-duration" type="text/template">
+      <li class="list-group-item duration-element" style='cursor: pointer;' id={{id}}>
+        <a><span class="badge pull-right"> &lt; {{text}} </span> {{label}}</a>
+      </li>
+    </script>
   </body>
 </html>
