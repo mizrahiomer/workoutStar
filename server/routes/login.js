@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const fs = require('fs');
+const mysql = require('mysql');
+const dbConfigs = require('./utils/dbconfigs');
 // create jwt token to be used as object
 let userToken = {};
 
