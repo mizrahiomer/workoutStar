@@ -24,9 +24,9 @@ const contact_route = function (express, conn) {
             } else {
                 console.log(data);
                 res.send('You have a new contact');
-            })
+            }
         })
-
+    })
 
         //get contact
     router.get('/contact', (req, res) => {
