@@ -91,7 +91,7 @@
       $("#form-wrapper").append(loader);
       const videoId = $("#video-id").val();
       console.log('f');
-      $.post('/checkId', videoId, function (response) {
+      $.post('/checkId', {videoId}, function (response) {
         console.log(response);
         getVideoDetails(videoId)
         $("#loader").remove();

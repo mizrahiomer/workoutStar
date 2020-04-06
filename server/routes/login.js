@@ -36,21 +36,18 @@ const login_route = function(express,conn) {
     //check if id exists in db
     router.post('/checkId', (req, res, next) => {
         //prevent sql injection
-        var sql = 'SELECT * FROM videos where videoId =' + conn.escape(req.body.url);
+        
+        console.log()
+        var sql = "SELECT * FROM videos where videoId ='" + req.body.videoId+"'";
         conn.query(sql, (err, rows) => {
-            if (rows.length > 0) {
-                if (err) {
-                    console.log(err);
-                    res.status(500).send(err);
-                } else {
-                    console.log(rows);
-                 res.send(rows);
-                }
+            if(err){
+                res.status(500).send(err);
             } else {
-                if(err){
-                    res.status(500).send(err);
-                }else {
+                console.log(rows.length > 0)
+                if (rows.length > 0) {
                     res.status(400).send(err);
+                }else {
+                    res.status(200).send(rows);
                 }
             }
         })
