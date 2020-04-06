@@ -3,11 +3,14 @@
 }
 
 .panel-default{
-    width: 18vw !important;
+    width: 15vw !important;
     float: left !important;
     margin: 5px;
 }
-
+.card-title{
+    margin: 0px;
+    font-size: 1.7vw;
+}
 
 @media only screen and (max-width: 760px){
     .panel-default{
