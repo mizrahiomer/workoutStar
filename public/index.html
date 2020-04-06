@@ -20,7 +20,7 @@
           auth2 = gapi.auth2.init({
             client_id:
               "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com"
-          });
+          })
         });
       }
     </script>
@@ -92,29 +92,6 @@
                     <li>Enjoy the workout</li>
                   </ul>
                 </div> -->
-              <!-- user -->
-              <!-- <li class="dropdown user">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                    src="images/people/110/guy-6.jpg"
-                    alt=""
-                    class="img-circle"
-                  />
-                  Bill<span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="#"><i class="fa fa-user"></i>Profile</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-wrench"></i>Settings</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-sign-out"></i>Logout</a>
-                  </li>
-                </ul>
-              </li> -->
-              <!-- // END user -->
             </ul>
             <!-- <form class="navbar-form navbar-right">
               <div class="search-2">
@@ -228,7 +205,6 @@
     <script>
       $( document ).ready(function() { 
         $("#upload-video").hide() 
-        console.log('localStorage' + localStorage.getItem('userId'))
         if(localStorage.getItem('userId') == null){
           $("#signinButton").click(function () {
             auth2.grantOfflineAccess().then(signInCallback)
@@ -283,7 +259,8 @@
         $.post('/user', userObj, function (response) {
           console.log(JSON.parse(response))
         }, 'application/json')
-        window.location.href = "./upload_video.html";
+        // window.location.href = "./upload_video.html";
+        window.open("./upload_video.html", '_blank');
       }
     }
   </script>
