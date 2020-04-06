@@ -6,7 +6,7 @@ const duration = [{id: 'S', label: 'Short', text: '30min'}, {id: 'M', label: 'Me
 
 const videosIds = [];
 const videos = [];
-let typoefilters=[];
+let typefilter=[];
 let equipmentfilter=[];
 let durarionfilter=[];
 
@@ -38,6 +38,7 @@ function updateDuration(){
 //Here is the magic!
 function addVideoToPanel(video){
   var template = jQuery('#video-panel-template').html();
+  console.log(video)
   var html = Mustache.render(template,{
     img:video.img,
     title:video.title,
@@ -73,11 +74,14 @@ function fetchVideos() {
 function filterRecord(){
   let displayedVideos = videos;
   console.log(displayedVideos);
-  if(typoefilters.length > 0){
-    displayedVideos = videos.filter(video => typoefilters.includes(video.type))
+  if(typefilter.length > 0){
+    displayedVideos = videos.filter(video => typefilter.includes(video.type))
   } 
   if(equipmentfilter.length > 0){
       displayedVideos = displayedVideos.filter(video => equipmentfilter.includes(video.mat) || equipmentfilter.includes(video.dumbbell))
+  }
+  if(durarionfilter.length>0){
+    displayedVideos=displayedVideos.filter(video=> durarionfilter.includes(video.length))
   }
 
   jQuery('#videos-container').empty();
@@ -95,17 +99,16 @@ $(document).ready(function() {
       const id= $(this).parent().attr("id");
       if($('#'+id).hasClass('active')){
         $('#'+id).removeClass('active')
-        typoefilters.splice( typoefilters.indexOf(id), 1 );
+        typefilter.splice( typefilter.indexOf(id), 1 );
       }else{
         $('#'+id).addClass('active')
-        typoefilters.push(id);
+        typefilter.push(id);
       }
       filterRecord();
    })
 
    $('.equipment-element a').click(function(){
     const id= $(this).parent().attr("id");
-    const catagory = $('#'+id).parent().attr("id");
     if($('#'+id).hasClass('active')){
       $('#'+id).removeClass('active')
       equipmentfilter.splice( equipmentfilter.indexOf(id), 1 );
@@ -115,6 +118,17 @@ $(document).ready(function() {
     }
     filterRecord();
  })
+ $('.duration-element a').click(function(){
+  const id= $(this).parent().attr("id");
+  if($('#'+id).hasClass('active')){
+    $('#'+id).removeClass('active')
+    durarionfilter.splice( durarionfilter.indexOf(id), 1 );
+  }else{
+    $('#'+id).addClass('active')
+    durarionfilter.push(id);
+  }
+  filterRecord();
+})
 
 
 

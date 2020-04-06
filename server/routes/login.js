@@ -33,21 +33,22 @@ router.use(bodyParser.json());
 
 const login_route = function (express, conn) {
     var router = express.Router();
-    //check if url exists in db
-    router.post('/videos/url', (req, res, next) => {
+    //check if id exists in db
+    router.post('/checkId', (req, res, next) => {
         //prevent sql injection
-        var sql = 'SELECT url FROM videos where url =' + conn.escape(req.body.url);
+        
+        console.log()
+        var sql = "SELECT * FROM videos where videoId ='" + req.body.videoId+"'";
         conn.query(sql, (err, rows) => {
-            if (rows.length > 0) {
-                if (err) {
-                    console.log(err);
-                    res.status(500).send(err);
-                } else {
-                    console.log(rows);
-                    return res.send(rows);
-                }
+            if(err){
+                res.status(500).send(err);
             } else {
-                return res.send(null);
+                console.log(rows.length > 0)
+                if (rows.length > 0) {
+                    res.status(400).send(err);
+                }else {
+                    res.status(200).send(rows);
+                }
             }
         })
     })

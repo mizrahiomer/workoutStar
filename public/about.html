@@ -14,16 +14,7 @@
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/libs/mustache.js"></script>
     <script src="/js/about.js"></script>
-    <script>
-      function start() {
-        gapi.load("auth2", function () {
-          auth2 = gapi.auth2.init({
-            client_id:
-              "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com"
-          });
-        });
-      }
-    </script>
+    <script src="/js/googleauth.js"></script>
     <title>Workout Star</title>
     <link href="css/vendor/all.css" rel="stylesheet" />
     <link href="css/app/app.css" rel="stylesheet" />
@@ -67,14 +58,14 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-            <li><a href="./about.html">About</a></li>
-              <li><a href="./upload_video.html">Upload</a></li>
-              <li>
+              <li><a href="./about.html">About Us</a></li>
+              <li id='upload-video'><a href="./add_video.html">Add a Video <i class='fa fa-film'></i></a></li>
+              <li>  
                 <a id="signinButton" style="cursor:pointer;">
-                Sign in with Google <i class="fa fa-google"></i>
                 </a>
               </li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right " style="display: none;">
               <div class="wizard-1" id="wizard-demo-1" >
                 <div data-scrollable-h>
@@ -117,12 +108,25 @@
                         </li>
                         <li class="nestable-item nestable-item-handle" data-id="3.2">
                           <div class="nestable-handle"><i class="md md-menu"></i></div>
-                          <div class="nestable-content">Encourage real time while helping students build muscle, tone and cardio</div>
+                          <div class="nestable-content">Encourage while helping students build muscle, tone and cardio
+                          </div>
                         </li>
                         <li class="nestable-item nestable-item-handle" data-id="3.3">
                           <div class="nestable-handle"><i class="md md-menu"></i></div>
                           <div class="nestable-content">Build clientis easy</div>
                         </li>
+                        <li class="nestable-item nestable-item-handle" data-id="3.3">
+                          <div class="nestable-handle"><i class="md md-menu"></i></div>
+                          <div class="nestable-content">Give pointers in real time
+                          </div>
+                        </li>
+                        <li class="nestable-item nestable-item-handle" data-id="3.3">
+                          <div class="nestable-handle"><i class="md md-menu"></i></div>
+                          <div class="nestable-content">Gyms can run online classes!
+
+                          </div>
+                        </li>
+
                       </ul>
                     </li>
                     <li class="nestable-item nestable-item-handle" data-id="2">
@@ -141,24 +145,20 @@
                           <div class="nestable-handle"><i class="md md-menu"></i></div>
                           <div class="nestable-content">Workout with your favorite YouTube trainers</div>
                         </li>
-                      </ul>
-                    </li>
-                    <li class="nestable-item nestable-item-handle" data-id="3">
-                      <div class="nestable-handle"><i class="md md-menu"></i></div>
-                      <div class="nestable-content">For Gyms, Contact Us to run Online Classes</div>
-                      <ul class="nestable-list">
-                        <li class="nestable-item nestable-item-handle" data-id="3.1">
+                        <li class="nestable-item nestable-item-handle" data-id="3.3">
                           <div class="nestable-handle"><i class="md md-menu"></i></div>
-                          <div class="nestable-content">Item 3.1</div>
-                        </li>
-                        <li class="nestable-item nestable-item-handle" data-id="3.2">
-                          <div class="nestable-handle"><i class="md md-menu"></i></div>
-                          <div class="nestable-content">Item 3.2</div>
+                          <div class="nestable-content">Have Fun while at home</div>
                         </li>
                         <li class="nestable-item nestable-item-handle" data-id="3.3">
                           <div class="nestable-handle"><i class="md md-menu"></i></div>
-                          <div class="nestable-content">Item 3.3</div>
+                          <div class="nestable-content">Keep exercise a priority, be happy</div>
                         </li>
+                        <li class="nestable-item nestable-item-handle" data-id="3.3">
+                          <div class="nestable-handle"><i class="md md-menu"></i></div>
+                          <div class="nestable-content">Many possibilities, online learning, kids classes and more!
+                          </div>
+                        </li>
+
                       </ul>
                     </li>
                   </ul>
@@ -255,9 +255,13 @@
                         <img src={{pic}} alt="people" class="media-object" />
                     </a>
                     <div class="media-body">
-                        <p>{{desc}}</p>
-                        <span class="label label-default">{{title}}</span>
-                        <a class="btn btn-sm btn-primary" href={{link}}>View linkdin</a>
+                        <p>
+                          <b>
+                          <h5>{{desc}}</h5>
+                          </b>
+                        </p>
+                        <span class="label {{label}}">{{team}}</span>
+                        <a class="btn btn-sm btn-primary" href={{link}}>Send Email</a>
                     </div>
                 </div>
             </div>
