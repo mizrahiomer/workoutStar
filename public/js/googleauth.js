@@ -78,5 +78,5 @@ function start() {
   }
 
 $(document).ready(function(){
-    showSignOut();
+    $("#upload-video").hide()
 })

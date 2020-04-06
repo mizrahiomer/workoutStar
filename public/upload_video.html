@@ -11,14 +11,18 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
     crossorigin="anonymous"></script>
+<<<<<<< HEAD
     <script src="/js/googleauth.js"></script>
 
+=======
+  <link href="css/app/app.css" rel="stylesheet" /> 
+>>>>>>> landing_page
 </head>
 
 <body>
 
   <div id="wrapper">
-    <div class="mx-auto col-6 border m-4 py-2 px-4 shadow rounded animated slideInDown" id="form-wrapper">
+    <div class="mx-auto col-6 border m-4 py-2 px-4 bg-white shadow rounded animated slideInDown" id="form-wrapper">
       <div id="video-upload">
         <div class="text-center h1 m-0">Video Upload</div>
         <div class="form-group">
@@ -28,13 +32,6 @@
               class="bg-warning font-weight-bold">dNEZKqopc2I</span>
               <p class="font-weight-bold"> *Please enter the highlighted section of the url only</p></small>
         </div>
-
-      <!--  <div class="form-group">
-          <label class="h5" for="form-check">Equipment</label>
-         <div class="form-check ">
-            <input checked class="form-check-input" type="radio" name="equipment" id="no" value="No equipment" />
-            <label class="form-check-label" for="no">No Equipment</label>
-          </div>-->
           <div class='form-group'>
           <label class="h5" >Equipment</label>
           <div class="form-check ">
@@ -59,8 +56,12 @@
           </select>
         </div>
         <div class="text-center">
+<<<<<<< HEAD
           
           <button onclick="getVideoDetails()" id="continue" class="btn btn-secondary  ">
+=======
+          <button onclick="checkId()" id="continue" class="btn btn-teal-500">
+>>>>>>> landing_page
             Continue
           </button>
         </div>
@@ -95,8 +96,22 @@
       $("#loader").remove();
       $("#form-wrapper").show();
     };
-    const getVideoDetails = () => {
+    const checkId = () =>{
+      const loader = `<div id='loader'class='text-center m-5'><div class="spinner-border"></div></div>`;
+      $("#form-wrapper").append(loader);
       const videoId = $("#video-id").val();
+      $.post('/checkId', videoId, function (response) {
+        getVideoDetails(videoId)
+        $("#loader").remove();
+      }).fail(function(error){
+        $("#loader").remove();
+        $("#form-wrapper").hide();
+            $("#wrapper").append(
+              `<div id='error' class='text-center m-5 p-3 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, a video with ID: <b>${videoId}</b> is allready exist <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
+            );
+      })
+    }
+    const getVideoDetails = (videoId) => {
       const userId = localStorage.getItem('userId')
       console.log('localStorage' +userId)
       const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
@@ -128,7 +143,7 @@
           if (data.items.length === 0) {
             $("#form-wrapper").hide();
             $("#wrapper").append(
-              `<div id='error' class='text-center m-5 border shadow col-6 mx-auto animated slideInDown'> Oops, <b>${videoId}</b> isn't valid youtube ID <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
+              `<div id='error' class='text-center m-5 p-3 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, <b>${videoId}</b> isn't valid youtube ID <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
             );
           }
           let { title, thumbnails } = data.items[0].snippet;
@@ -167,7 +182,7 @@
       <input type="text" class="form-control" id="video-url" />
       <div>
       <div class='text-center mt-3'> <img id='video-img' class=' rounded shadow' alt='video Image'/><br>
-        <button class='mt-3 btn btn-primary' onclick='uploadVideo()'>Upload Video </button></div>
+        <button class='mt-3 btn btn-indigo-500' onclick='uploadVideo()'>Upload Video </button></div>
               </div>
               <div id="result">
               `
@@ -204,42 +219,6 @@
         $('#loader').remove();
       })
     };
-
-
-    // $("#signinButton").click(function () {
-    //   // signInCallback defined in step 6.
-
-    //   auth2.grantOfflineAccess().then(signInCallback);
-    // });
-
-    // function signInCallback(authResult) {
-    //   if (authResult["code"]) {
-    //     // Hide the sign-in button now that the user is authorized, for example:
-    //     $("#signinButton").attr("style", "display: none");
-    //     $("#video-upload").show();
-
-    //     const userName = auth2.currentUser
-    //       .get()
-    //       .getBasicProfile()
-    //       .getName();
-
-    //     const userId = auth2.currentUser.get().getId();
-    //     const userEmail = auth2.currentUser
-    //       .get()
-    //       .getBasicProfile()
-    //       .getEmail()
-
-    //     const userObj = {
-    //       userId,
-    //       userName,
-    //       userEmail
-    //     }
-    
-    //     $.post('/user', userObj, function (response) {
-    //       console.log(JSON.parse(response))
-    //     }, 'application/json')
-    //   }
-    // }
-  </script>
+    </script>
 </body>
 </html>

@@ -33,10 +33,10 @@ router.use(upload(express));
 
 const login_route = function(express,conn) {
     var router = express.Router();
-    //check if url exists in db
-    router.post('/videos/url', (req, res, next) => {
+    //check if id exists in db
+    router.post('/checkId', (req, res, next) => {
         //prevent sql injection
-        var sql = 'SELECT url FROM videos where url =' + conn.escape(req.body.url);
+        var sql = 'SELECT * FROM videos where videoId =' + conn.escape(req.body.url);
         conn.query(sql, (err, rows) => {
             if (rows.length > 0) {
                 if (err) {
