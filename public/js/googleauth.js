@@ -76,5 +76,5 @@ function start() {
   }
 
 $(document).ready(function(){
-
+    showSignIn();
 })
