@@ -57,8 +57,8 @@ function start() {
         .getBasicProfile()
         .getName();
 
-      const userId = window.gapi.auth2.currentUser.getAuthInstance().get().getId();
-      const userEmail = window.gapi.auth2.currentUser
+      const userId = window.gapi.auth2.getAuthInstance().currentUser.get().getId();
+      const userEmail = window.gapi.auth2.getAuthInstance().currentUser
         .get()
         .getBasicProfile()
         .getEmail()
