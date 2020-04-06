@@ -73,7 +73,7 @@ function start() {
       $.post('/user', userObj, function (response) {
         console.log(JSON.parse(response))
       }, 'application/json')
-      window.open("./upload_video.html", '_blank');
+      window.open("./add_video.html", '_blank');
     }
   }
 
