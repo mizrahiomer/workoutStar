@@ -5,13 +5,10 @@ const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const fs = require('fs');
-const mysql = require('mysql');
-const dbConfigs = require('./utils/dbconfigs');
+const SqlString = require('sqlstring');
 // create jwt token to be used as object
 let userToken = {};
 
-
-const conn = mysql.createPool(dbConfigs);
 //create jwt with user payload
 const createToken = user => {
     return jwt.sign(user, 'my_secret_key', { expiresIn: 86400 * 1000 })
@@ -85,7 +82,7 @@ const login_route = function (express, conn) {
         var id = req.body.userId;
         var email = req.body.email;
         var inserts = ['users', 'username', username, 'id', id];
-        sql1 = mysql.format(sql1, inserts)
+        sql1 = SqlString.format(sql1, inserts)
 
         sql2 = 'INSERT INTO users SET ?';
         var post = {

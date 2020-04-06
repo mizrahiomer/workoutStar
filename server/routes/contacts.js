@@ -3,14 +3,16 @@ const bodyParser = require("body-parser");
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const mysql = require('mysql');
+const dbConfigs = require('../utils/dbconfigs');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-const contact_route = function (express, conn) {
-    var router = express.Router();
+const conn = mysql.createPool(dbConfigs);
 
-    router.post('/newContact', (req, res) => {
+const contact_route = function (express) {
+        router.post('/newContact', (req, res) => {
         var post = {
             name: req.body.name,
             message: req.body.message,

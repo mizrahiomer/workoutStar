@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const busboy = require("then-busboy");
 const mysql = require('mysql');
 const dbConfigs = require('./utils/dbconfigs');
+const router = express.Router();
 
 const port = process.env.PORT || 3000;
 
@@ -38,7 +39,7 @@ app.use('/',express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/',login_route(express, conn));
-app.use('/',contact_route(express, conn));
+app.use(contact_route);
 // app.use('/',navigation_routes(app,express))
 
 
