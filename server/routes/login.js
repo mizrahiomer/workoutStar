@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const fs = require('fs');
-const upload = require('./upload');
 // create jwt token to be used as object
 let userToken = {};
 
@@ -27,8 +26,6 @@ router.use(cookieParser());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 //router.use(expressValidator());
-router.use(upload(express));
-
 
 
 const login_route = function(express,conn) {

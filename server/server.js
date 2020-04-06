@@ -17,8 +17,8 @@ var server = http.createServer(app);
 var io = socketIO(server),
 workout_connection = require('./routes/workout_connection')(io);
 var navigation_routes = require('./routes/navigation');
-var uploads = require('./routes/upload');
 var login_route = require('./routes/login');
+var contact_route =require('./routes/contacts');
 
 var corsOptions ={
   origin:'http://localhost:3000',
@@ -37,8 +37,8 @@ app.use(express.json());
 app.use('/',express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/fileupload',uploads(express))
 app.use('/',login_route(express, conn));
+app.use('/',contact_route(express, conn));
 // app.use('/',navigation_routes(app,express))
 
 
