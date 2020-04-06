@@ -44,10 +44,14 @@ const login_route = function(express,conn) {
                     res.status(500).send(err);
                 } else {
                     console.log(rows);
-                    return res.send(rows);
+                 res.send(rows);
                 }
             } else {
-                return res.send(null);
+                if(err){
+                    res.status(500).send(err);
+                }else {
+                    res.status(400).send(err);
+                }
             }
         })
     })
