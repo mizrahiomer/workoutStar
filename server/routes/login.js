@@ -32,7 +32,7 @@ const login_route = function (express, conn) {
     //check if id exists in db
     router.post('/checkId', (req, res, next) => {
         //prevent sql injection
-        
+
         console.log()
         var sql = "SELECT * FROM videos where videoId ='" + req.body.videoId+"'";
         conn.query(sql, (err, rows) => {
@@ -56,7 +56,7 @@ const login_route = function (express, conn) {
             img: req.body.img,
             duration: req.body.duration,
             title: req.body.title,
-            length: req.body.length, 
+            length: req.body.length,
             type: req.body.type,
             mat: req.body.mat,
             dumbbell: req.body.dumbbell,
@@ -160,22 +160,22 @@ const login_route = function (express, conn) {
         userName = userToken.username;
         next();
     });
-      
 
-    //get videos uploaded by type
-    router.get('/videos/:type', (req, res) => {
 
-        conn.query(`SELECT * FROM videos where type ='${type}'`, (err, videodetails) => {
-            if (err) {
-                console.log(err);
-                res.status(500).send(err);
-            }
-            else {
-                console.log(videodetails);
-                res.send(videodetails)
-            }
-        })
-    })
+    // //get videos uploaded by type
+    // router.get('/videos/:type', (req, res) => {
+
+    //     conn.query(`SELECT * FROM videos where type ='${type}'`, (err, videodetails) => {
+    //         if (err) {
+    //             console.log(err);
+    //             res.status(500).send(err);
+    //         }
+    //         else {
+    //             console.log(videodetails);
+    //             res.send(videodetails)
+    //         }
+    //     })
+    // })
     // get all videos
     router.get('/allVideos', (req, res) => {
 
