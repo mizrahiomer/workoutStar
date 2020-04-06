@@ -30,8 +30,6 @@ var corsOptions ={
 
 const conn = mysql.createPool(dbConfigs);
 
-
-
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(cookieParser())

@@ -1,5 +1,5 @@
 
-const types = ['Yoga', 'Hiit', 'Pilates', 'Cardio', 'Strength', 'Toning'];
+const types = ['Yoga', 'HIIT', 'Pilates', 'Cardio', 'Strength', 'Toning'];
 const equipments = [{label:'Mat', id: 'Mat'}, {label:'Dumbbell', id: 'Dumbb'}];
 
 const duration = [{id: 'S', label: 'Short', text: '30min'}, {id: 'M', label: 'Medium', text: '30m-60m'}, {id: 'L', label: 'Long', text: '60m'}]
