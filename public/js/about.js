@@ -4,7 +4,7 @@ const team = [
         team: 'Product Team',
         desc: 'Product and team builder',
         link: 'michaellerner10@gmail.com',
-        pic: './images/Michael.jpeg',
+        pic: 'https://i.imgur.com/qj2K5on.jpg',
         label: 'label-success'
     },
     {
@@ -12,7 +12,7 @@ const team = [
         desc: 'Mom | Microsoft DevRel PM | Tech Ecosystem Promoter',
         team: 'Product Team',
         link: '#',
-        pic: './images/adi.jpeg',
+        pic: 'https://i.imgur.com/FnEfAPm.jpg',
         label: 'label-success'
 
     },
@@ -30,7 +30,7 @@ const team = [
         team: 'Client Team',
         desc: 'Front-end Developer',
         link: '#',
-        pic: './images/omer.jpeg',
+        pic: 'https://i.imgur.com/NbZ04as.jpg',
         label: 'label-danger'
 
     },
@@ -39,7 +39,7 @@ const team = [
         team: 'Product Team',
         desc: 'UI / UX Designer',
         link: '#',
-        pic: './images/sharon.jpeg',
+        pic: 'https://i.imgur.com/uof2WZr.jpg',
         label: 'label-success'
 
     },
@@ -48,7 +48,7 @@ const team = [
         team: 'Client Team',
         desc: 'Full Stack Developer, ESL coach.',
         link: 'shainaschiff@outlook.com',
-        pic: './images/shaina.jpeg',
+        pic: 'https://i.imgur.com/dMAJSMB.jpg',
         label: 'label-danger'
 
     }
@@ -58,7 +58,7 @@ const team = [
         team: 'Server Team',
         desc: 'Real Time Embedded Developer',
         link: '#',
-        pic: './images/yaron.jpeg',
+        pic: 'https://i.imgur.com/RdeVdta.jpg',
         label: 'label-warning'
 
     }
