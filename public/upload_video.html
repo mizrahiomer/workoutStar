@@ -85,10 +85,14 @@
       $("#form-wrapper").show();
     };
     const checkId = () =>{
+      const loader = `<div id='loader'class='text-center m-5'><div class="spinner-border"></div></div>`;
+      $("#form-wrapper").append(loader);
       const videoId = $("#video-id").val();
-      $.post('/videoupload', videoId, function (response) {
-        checkVideoDetails(videoId)
+      $.post('/checkId', videoId, function (response) {
+        getVideoDetails(videoId)
+        $("#loader").remove();
       }).fail(function(error){
+        $("#loader").remove();
         $("#form-wrapper").hide();
             $("#wrapper").append(
               `<div id='error' class='text-center m-5 p-3 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, a video with ID: <b>${videoId}</b> is allready exist <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
