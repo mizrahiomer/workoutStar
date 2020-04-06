@@ -100,7 +100,7 @@
         $("#loader").remove();
         $("#form-wrapper").hide();
             $("#wrapper").append(
-              `<div id='error' class='text-center m-5 p-3 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, a video with ID: <b>${videoId}</b> is allready exist <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
+              `<div id='error' class='text-center m-5 p-5 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, a video with ID: <b>${videoId}</b> is allready exist <br><button class='btn btn-red-500 m-3' onclick='goBack()'>Go Back</button></div>`
             );
       })
     }
@@ -136,7 +136,7 @@
           if (data.items.length === 0) {
             $("#form-wrapper").hide();
             $("#wrapper").append(
-              `<div id='error' class='text-center m-5 p-3 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, <b>${videoId}</b> isn't valid youtube ID <br><button class='btn btn-danger m-3' onclick='goBack()'>Go Back</button></div>`
+              `<div id='error' class='text-center m-5 p-5 h5 border shadow col-6 mx-auto animated slideInDown'> Oops, <b>${videoId}</b> isn't valid youtube ID <br><button class='btn btn-red-500 m-3' onclick='goBack()'>Go Back</button></div>`
             );
           }
           let { title, thumbnails } = data.items[0].snippet;
@@ -205,8 +205,8 @@
       $("#form-wrapper").append(loader);
       $.post('/videoupload', videoObj, function (response) {
         $("#result").html(JSON.stringify(response));
-        window.history.back();
         $('#loader').remove();
+        window.location.href='./index.html'
       }).fail(function(error){
         alert('Error: '+error.responseText.msg)
         $('#loader').remove();
