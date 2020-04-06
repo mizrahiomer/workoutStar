@@ -77,6 +77,10 @@ function start() {
     }
   }
 
+  function getGoogleUser(){
+    console.log('u');
+    return window.gapi.auth2.getAuthInstance().currentUser.get()
+  }
 $(document).ready(function(){
     $("#upload-video").hide()
 })
