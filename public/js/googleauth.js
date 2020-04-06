@@ -38,7 +38,6 @@ function start() {
   }
 
   function showSignIn(){
-      console.log('hello')
     $("#signinButton").click(function () {
         window.gapi.auth2.getAuthInstance().signOut().then(()=>{
             localStorage.removeItem('userId')
@@ -77,5 +76,5 @@ function start() {
   }
 
 $(document).ready(function(){
-    
+
 })
