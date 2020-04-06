@@ -18,7 +18,12 @@ var io = socketIO(server),
 workout_connection = require('./routes/workout_connection')(io);
 var navigation_routes = require('./routes/navigation');
 var login_route = require('./routes/login');
+<<<<<<< HEAD
 var contact_route =require('./routes/contacts');
+=======
+var video_route = require('./routes/video_route');
+
+>>>>>>> 951c1089e157cf1048b3b3e945ce862b96561d35
 
 var corsOptions ={
   origin:'http://localhost:3000',
@@ -37,6 +42,10 @@ app.use(express.json());
 app.use('/',express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+<<<<<<< HEAD
+=======
+app.use('/videos',video_route(express,conn))
+>>>>>>> 951c1089e157cf1048b3b3e945ce862b96561d35
 app.use('/',login_route(express, conn));
 app.use('/',contact_route(express, conn));
 // app.use('/',navigation_routes(app,express))

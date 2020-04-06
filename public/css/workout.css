@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
 
 body{
   margin: auto 0;
@@ -20,6 +20,11 @@ section{
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+section .float-button{
+  position: absolute;
+  z-index: 100;
 }
 #player{
   width: 100% !important;
@@ -267,11 +272,30 @@ nav.close #toggle-nav{
   animation-fill-mode: forwards;
   animation-delay: 0.1s;
   display: inline-flex;
-  overflow: hidden;
 
 }
 
 #audiobutton {
+  background-color: #26a69a;
+  border: 0px;
+  background-color: #f1f3f4;
+  border-top-right-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+  width: 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+
+
+}
+.audio1{
+  -moz-animation: audio1 1.5s infinite ease-in-out;
+  -o-animation: audio1 1.5s infinite ease-in-out;
+  -webkit-animation: audio1 1.5s infinite ease-in-out;
+  animation: audio1 1.5s infinite ease-in-out;
+}
+#audiobutton .innerbutton {
+
   background-color: #26a69a;
   border: 0px;
   background-color: #f1f3f4;
@@ -282,14 +306,23 @@ nav.close #toggle-nav{
   font-size: 1.2rem;
   cursor: pointer;
   outline: none;
+  height:100%;
 }
-
-#audiobutton:hover{
+.audio2{
+  -moz-animation: audio2 2.2s infinite ease-in-out;
+  -o-animation: audio2 2.2s infinite ease-in-out;
+  -webkit-animation: audio2 2.2s infinite ease-in-out;
+  animation: audio2 2.2s infinite ease-in-out;
+}
+#audiobutton .innerbutton:hover{
   background-color: #eaeaea;
 }
-
 #audiobutton.mute{
+  animation-play-state: paused;
+}
+#audiobutton.mute .innerbutton{
   color: #b9b9b9;
+  animation-play-state: paused;
 }
 
 #prais-message{
@@ -297,12 +330,47 @@ nav.close #toggle-nav{
   top: 70%;
   left: 50%;
   transform: translate(-50%);
-  color: red;
   z-index: 1000;
   display: none;
-  font-family: 'Fredoka One', cursive;
-
+  font-family: 'Kalam', cursive;
 }
+
+#prais-message.random2{
+  color: #4b5da3;
+  text-shadow: -1px 0 #ffee00, 0 1px white, 1px 0 white, 0 -1px #ffee00;
+}
+
+#prais-message.random3{
+  color: #ffee00;
+  text-shadow: -1px 0 #4b5da3, 0 1px white, 1px 0 white, 0 -1px #4b5da3;
+}
+
+#prais-message.random4{
+  color: #ff1100;
+  text-shadow: -1px 0 #ffee00, 0 1px white, 1px 0 white, 0 -1px #ffee00;
+}
+
+#prais-message.random5{
+  color: #ff00cc;
+  text-shadow: -1px 0 #b3007d, 0 1px white, 1px 0 white, 0 -1px #b3007d;
+}
+
+#prais-message.random6{
+  color: #00fbff;
+  text-shadow: -1px 0 #063a94, 0 1px white, 1px 0 white, 0 -1px #063a94;
+}
+
+#prais-message.random1{
+  color: #00fbff;
+  text-shadow: -1px 0 #b3007d, 0 1px white, 1px 0 white, 0 -1px #b3007d;
+}
+
+#prais-message.random7{
+  color: #b3007d;
+  text-shadow: -1px 0 #ffee00, 0 1px white, 1px 0 white, 0 -1px #ffee00;
+}
+
+
 
 #prais-message.active{
   opacity: 0;
@@ -317,23 +385,44 @@ nav.close #toggle-nav{
   border: 0;
   outline: none;
   display: block;
-  background-color: #26a69a;
+  background-color: white;
   border-radius: 5px;
   padding: 0.8rem 1.2rem;
   cursor: pointer;
   transform: rotate(-1deg);
   color: white;
-  font-size:1.3rem;
-  width:85%;
+  font-family: 'Kalam', cursive;
+  height: 4.5rem;
+  width: 4.5rem;
+  border-radius: 50%;
+  position: relative;
+  bottom: 1rem;
 }
 
-#parise-button:active{
-  transform: rotate(-1deg) scale(0.99);
+#parise-button span{
+  top: 5%;
+  left:-2rem;
+  position: absolute;
+  color: #4b5da3;
+  font-size:2rem;
+  line-height: 1.5rem;
+  text-shadow: -1px 0 #ffee00, 0 1px white, 1px 0 white, 0 -1px #ffee00;
 }
+#parise-button img{
+  position: absolute;
+  top: 20%;
+  right:-1rem;
+  color: #4b5da3;
+  transform: scale(1.3) rotate(5deg);
 
+}
 #parise-button:hover{
-  opacity: 0.8;
+  transform: rotate(-2deg);
 }
+#parise-button:active{
+  transform: rotate(-5deg) scale(0.95);
+}
+
 
 #parise-button img{
   height: 3rem;
@@ -349,4 +438,40 @@ nav.close #toggle-nav{
 @keyframes show_animation {
   from {opacity: 0; top: 70%;transform: scale(1);}
   to {opacity: 1; top: 50%;transform: scale(5);}
+}
+
+
+
+
+
+@keyframes audio1 {
+  0%,
+  100% {
+     box-shadow: 0 0 0 0.4em rgba(38, 166, 154, 0.4);
+  }
+  25% {
+     box-shadow: 0 0 0 0.15em rgba(38, 166, 154, 0.15);
+  }
+  50% {
+     box-shadow: 0 0 0 0.55em rgba(38, 166, 154, 0.55);
+  }
+  75% {
+     box-shadow: 0 0 0 0.25em rgba(38, 166, 154, 0.25);
+  }
+}
+
+@keyframes audio2 {
+  0%,
+  100% {
+     box-shadow: 0 0 0 0.25em rgba(38, 166, 154, 0.15);
+  }
+  25% {
+     box-shadow: 0 0 0 0.4em rgba(38, 166, 154, 0.3);
+  }
+  50% {
+     box-shadow: 0 0 0 0.15em rgba(38, 166, 154, 0.05);
+  }
+  75% {
+     box-shadow: 0 0 0 0.55em rgba(38, 166, 154, 0.45);
+  }
 }

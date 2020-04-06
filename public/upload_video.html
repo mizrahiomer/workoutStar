@@ -25,13 +25,7 @@
               <p style="color:rgb(255, 217, 0)"> Please enter the highlighted section of the url only</p></small>
         </div>
 
-      <!--  <div class="form-group">
-          <label class="h5" for="form-check">Equipment</label>
-         <div class="form-check ">
-            <input checked class="form-check-input" type="radio" name="equipment" id="no" value="No equipment" />
-            <label class="form-check-label" for="no">No Equipment</label>
-          </div>-->
-          <div class="form-check ">
+              <div class="form-check ">
             <input type="checkbox" name="mat" id="mat" value="Mat" />
             <label class="form-check-label" for="mat">Mat</label>
           </div>
@@ -147,7 +141,7 @@
           }
           $("#wrapper").html(
             ` <div
-      class="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft">
+      class="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft" id="form-wrapper">
       <div class='text-center'> Hey, we got some details about your video from youtube, you can add them if you want to.</div>
       <div class="form-group"><label class="h5 mt-1" for="video-url">Video Title</label>
       <input type="text" class="form-control" id="video-title" />
@@ -185,47 +179,18 @@
         img
       };
       console.log(videoObj);
-
+      const loader = `<div id='loader'class='text-center m-5'><div class="spinner-border"></div></div>`;
+      $("#form-wrapper").append(loader);
       $.post('/videoupload', videoObj, function (response) {
-      $("#result").html(JSON.stringify(response));
+        $("#result").html(JSON.stringify(response));
+        window.history.back();
+        $('#loader').remove();
+      }).fail(function(error){
+        alert('Error: '+error.responseText.msg)
+        $('#loader').remove();
       })
     };
-
-
-    // $("#signinButton").click(function () {
-    //   // signInCallback defined in step 6.
-
-    //   auth2.grantOfflineAccess().then(signInCallback);
-    // });
-
-    // function signInCallback(authResult) {
-    //   if (authResult["code"]) {
-    //     // Hide the sign-in button now that the user is authorized, for example:
-    //     $("#signinButton").attr("style", "display: none");
-    //     $("#video-upload").show();
-
-    //     const userName = auth2.currentUser
-    //       .get()
-    //       .getBasicProfile()
-    //       .getName();
-
-    //     const userId = auth2.currentUser.get().getId();
-    //     const userEmail = auth2.currentUser
-    //       .get()
-    //       .getBasicProfile()
-    //       .getEmail()
-
-    //     const userObj = {
-    //       userId,
-    //       userName,
-    //       userEmail
-    //     }
-    
-    //     $.post('/user', userObj, function (response) {
-    //       console.log(JSON.parse(response))
-    //     }, 'application/json')
-    //   }
-    // }
+   
   </script>
 </body>
 </html>
