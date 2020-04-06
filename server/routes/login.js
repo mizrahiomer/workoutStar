@@ -5,12 +5,6 @@ const bodyParser = require("body-parser");
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const fs = require('fs');
-<<<<<<< HEAD
-=======
-const mysql = require('mysql');
-const dbConfigs = require('../utils/dbconfigs');
-const async = require('async');
->>>>>>> 951c1089e157cf1048b3b3e945ce862b96561d35
 // create jwt token to be used as object
 let userToken = {};
 
