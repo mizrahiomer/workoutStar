@@ -21,7 +21,16 @@
             client_id:
               "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com"
           });
-        });
+        })
+        .then(() => {
+          console.log('signed in', window.gapi.auth2.getAuthInstance().isSignedIn.get());
+          window.gapi.auth2.getAuthInstance().isSignedIn.listen((signedIn) => {
+            console.log(signedIn);
+          });
+          window.gapi.auth2.getAuthInstance().currentUser.listen((user) => {
+            console.log(user);
+          });
+        });;
       }
     </script>
     <title>Workout Star</title>
@@ -225,12 +234,12 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script>
+      $(document).load(function(){
 
+      })
       $("#signinButton").click(function () {
-    
-
-      auth2.grantOfflineAccess().then(signInCallback);
-    });
+        auth2.grantOfflineAccess().then(signInCallback);
+      });
 
     function signInCallback(authResult) {
       if (authResult["code"]) {
