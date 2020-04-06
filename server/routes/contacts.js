@@ -43,3 +43,4 @@ const contact_route = function (express, conn) {
             }
         })
     };
+module.exports=contact_route;
