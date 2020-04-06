@@ -1,7 +1,6 @@
 var currUser;
 
 function start() {
-    console.log('lalal')
     window.gapi.auth2.init({
       client_id: "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com",
     //   client_id: "774842210033-lb3hs94vv7mtefrsret85gil9lq9j4fs.apps.googleusercontent.com"
@@ -10,17 +9,7 @@ function start() {
       console.log('current user ', window.gapi.auth2.getAuthInstance().currentUser.get());
       var signIn = window.gapi.auth2.getAuthInstance().isSignedIn.get();
       currUser = window.gapi.auth2.getAuthInstance().currentUser.get()
-      if(signIn){
-        showSignIn();
-      } else {
-          showSignOut();
-      }
       window.gapi.auth2.getAuthInstance().isSignedIn.listen((signedIn) => {
-        if(signedIn){
-            showSignIn();
-          } else {
-              showSignOut();
-          }
 
       });
 
@@ -30,28 +19,8 @@ function start() {
       });
     });
 }
-
-  function showSignOut(){
-    $("#upload-video").hide()
-    $("#signinButton").click(function () {
-        window.gapi.auth2.getAuthInstance().grantOfflineAccess().then(signInCallback)
-    })
-    $("#signinButton").html("Sign In <i class='fa fa-google'></i>");
-  }
-
-  function showSignIn(){
-    $("#signinButton").click(function () {
-        window.gapi.auth2.getAuthInstance().signOut().then(()=>{
-            localStorage.removeItem('userId')
-        })
-    })
-    $("#signinButton").html("Sign Out <i class='fa fa-sign-out'></i>");
-    $("#upload-video").show();
-  }
-
   function signInCallback(authResult) {
     if (authResult["code"]) {
-      $("#signinButton").html("Sign Out <i class='fa fa-sign-out'></i>");
       const userName = window.gapi.auth2.getAuthInstance().currentUser
         .get()
         .getBasicProfile()
@@ -69,11 +38,11 @@ function start() {
         userEmail
       }
 
-      localStorage.setItem('userId',userId)
       $.post('/user', userObj, function (response) {
         console.log(JSON.parse(response))
       }, 'application/json')
       window.open("./add_video.html", '_blank');
+
     }
   }
 
@@ -82,5 +51,16 @@ function start() {
     return window.gapi.auth2.getAuthInstance().currentUser.get()
   }
 $(document).ready(function(){
-    $("#upload-video").hide()
+  $('#signinButton').click(function(){
+    if(!window.gapi.auth2.getAuthInstance()) start();
+    else{
+      console.log(window.gapi.auth2.getAuthInstance().isSignedIn.get())
+      if(window.gapi.auth2.getAuthInstance().isSignedIn.get()){
+        window.open("./add_video.html", '_blank');
+      }else{
+        window.gapi.auth2.getAuthInstance().grantOfflineAccess().then(signInCallback)
+
+      }
+    }
+  })
 })
