@@ -14,16 +14,7 @@
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/libs/mustache.js"></script>
     <script src="/js/about.js"></script>
-    <script>
-      function start() {
-        gapi.load("auth2", function () {
-          auth2 = gapi.auth2.init({
-            client_id:
-              "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com"
-          });
-        });
-      }
-    </script>
+    <script src="/js/googleauth.js"></script>
     <title>Workout Star</title>
     <link href="css/vendor/all.css" rel="stylesheet" />
     <link href="css/app/app.css" rel="stylesheet" />
@@ -67,14 +58,14 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-            <li><a href="./about.html">About</a></li>
-              <li><a href="./upload_video.html">Upload</a></li>
-              <li>
+              <li><a href="./about.html">About Us</a></li>
+              <li id='upload-video'><a href="./upload_video.html">Add a Video <i class='fa fa-film'></i></a></li>
+              <li>  
                 <a id="signinButton" style="cursor:pointer;">
-                Sign in with Google <i class="fa fa-google"></i>
                 </a>
               </li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right " style="display: none;">
               <div class="wizard-1" id="wizard-demo-1" >
                 <div data-scrollable-h>
