@@ -1,8 +1,10 @@
 var currUser;
 
 function start() {
+    console.log('lalal')
     window.gapi.auth2.init({
       client_id: "27295779158-sdqaicgo9l8qmlo8mr0f42um84ve8gkd.apps.googleusercontent.com",
+    //   client_id: "774842210033-lb3hs94vv7mtefrsret85gil9lq9j4fs.apps.googleusercontent.com"
     }).then(() => {
       console.log('signed in', window.gapi.auth2.getAuthInstance().isSignedIn.get());
       console.log('current user ', window.gapi.auth2.getAuthInstance().currentUser.get());
@@ -19,7 +21,7 @@ function start() {
           } else {
               showSignOut();
           }
-    
+
       });
 
       window.gapi.auth2.getAuthInstance().currentUser.listen((user) => {
@@ -42,7 +44,7 @@ function start() {
         window.gapi.auth2.getAuthInstance().signOut().then(()=>{
             localStorage.removeItem('userId')
         })
-    }) 
+    })
     $("#signinButton").html("Sign Out <i class='fa fa-sign-out'></i>");
     $("#upload-video").show();
   }
