@@ -141,7 +141,7 @@
           }
           $("#wrapper").html(
             ` <div
-      class="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft">
+      class="mx-auto col-6 border m-2 py-2 px-4 shadow rounded animated slideInLeft" id="form-wrapper">
       <div class='text-center'> Hey, we got some details about your video from youtube, you can add them if you want to.</div>
       <div class="form-group"><label class="h5 mt-1" for="video-url">Video Title</label>
       <input type="text" class="form-control" id="video-title" />
@@ -179,9 +179,15 @@
         img
       };
       console.log(videoObj);
-
+      const loader = `<div id='loader'class='text-center m-5'><div class="spinner-border"></div></div>`;
+      $("#form-wrapper").append(loader);
       $.post('/videoupload', videoObj, function (response) {
-      $("#result").html(JSON.stringify(response));
+        $("#result").html(JSON.stringify(response));
+        window.history.back();
+        $('#loader').remove();
+      }).fail(function(error){
+        alert('Error: '+error.responseText.msg)
+        $('#loader').remove();
       })
     };
    

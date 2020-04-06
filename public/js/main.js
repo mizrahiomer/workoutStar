@@ -1,17 +1,67 @@
-const realFileBtn = document.getElementById("real-file");
-const customBtn = document.getElementById("custom-button");
-const customTxt = document.getElementById("custom-text");
+const videos = [
+  {
+    videoId: 'g67ggjh9',
+    equipment: 'No equipment',
+    type: 'Yoga',
+    title: 'Test',
+    duration: '00:03:15',
+    length: 'S',
+    url: '#',
+    img: 'images/placeholder.jpg',
+    userId: '7218hfjisa'
+  },
+  {
+    videoId: 'g67ggjh9',
+    equipment: 'No equipment',
+    type: 'Yoga',
+    title: 'Test',
+    duration: '00:03:15',
+    length: 'S',
+    url: '#',
+    img: 'images/placeholder.jpg',
+    userId: '7218hfjisa'
+  },
+  {
+    videoId: 'g67ggjh9',
+    equipment: 'No equipment',
+    type: 'Yoga',
+    title: 'Test',
+    duration: '00:03:15',
+    length: 'S',
+    url: '#',
+    img: 'images/placeholder.jpg',
+    userId: '7218hfjisa'
+  },
+  {
+    videoId: 'g67ggjh9',
+    equipment: 'No equipment',
+    type: 'Yoga',
+    title: 'Test',
+    duration: '00:03:15',
+    length: 'S',
+    url: '#',
+    img: 'images/placeholder.jpg',
+    userId: '7218hfjisa'
+  },
+]
 
-customBtn.addEventListener("click", function() {
-  realFileBtn.click();
-});
+//Here is the magic!
+function addVideoToPanel(video){
+  var template = jQuery('#video-panel-template').html();
+  console.log(video)
+  var html = Mustache.render(template,{
+    img:video.img,
+    title:video.title,
+    type:video.type,
+  });
+  jQuery('#video-container').append(html);
+}
 
-realFileBtn.addEventListener("change", function() {
-  if (realFileBtn.value) {
-    customTxt.innerHTML = realFileBtn.value.match(
-      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-    )[1];
-  } else {
-    customTxt.innerHTML = "No file chosen, yet.";
-  }
-});
+
+$(document).ready(function() {
+  videos.forEach(function(video){
+    addVideoToPanel(video);
+  })
+})
+
+
