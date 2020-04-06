@@ -6,7 +6,7 @@
     width: 15vw !important;
     float: left !important;
     margin: 5px;
-    height: 20rem;
+    height: 20vw;
 }
 .card-title{
     margin: 0px;
@@ -17,6 +17,8 @@
     .panel-default{
         width: 87vw !important;
         float: left !important;
+        height: unset !important;
+
     }    
     
 }
