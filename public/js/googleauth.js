@@ -47,10 +47,10 @@ function start() {
   }
 
   function getGoogleUser(){
-    console.log('u');
     return window.gapi.auth2.getAuthInstance().currentUser.get()
   }
 $(document).ready(function(){
+  start();
   $('#signinButton').click(function(){
     if(!window.gapi.auth2.getAuthInstance()) start();
     else{
