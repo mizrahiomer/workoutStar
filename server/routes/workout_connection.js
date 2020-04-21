@@ -9,19 +9,21 @@ const workout_connection = function (io) {
           const {sessionid} = params;
           socket.join(sessionid);
           var session = workouts.getSession(sessionid);
-          if(!session){
-            session = workouts.addSession(sessionid);
+          if(!session && params.admin != '0'){
+            session = rooms.addSession(sessionid);  
           }
-          session.removeUser(socket.id);
-          var user = session.addUser(socket.id,params.admin);
-          if(!user){
-            socket.emit('error', {code: 0, message: 'There is already admin in this room'});
-          } else {            
-            if(!user.admin){
-              socket.emit('updateVideoFromServer',{
-                current_time: session.getTime(),
-                state: session.getState()
-              });
+          if(session){
+            session.removeUser(socket.id);
+            var user = session.addUser(socket.id,params.admin);
+            if(!user){
+              socket.emit('error', {code: 0, message: 'There is already admin in this room'});
+            } else {            
+              if(!user.admin){
+                socket.emit('updateVideoFromServer',{
+                  current_time: session.getTime(),
+                  state: session.getState()
+                });
+              }
             }
           }
 

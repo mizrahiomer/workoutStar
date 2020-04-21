@@ -67,6 +67,10 @@ function onPlayIsReady(event) {
 
     socket.on('error',function(params){
       console.error(params);
+      const {code} = params;
+      if(code == 0){
+        $('#cover').css('display', 'inline-block')
+      }
     })
   })
 
