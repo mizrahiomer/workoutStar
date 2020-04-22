@@ -42,7 +42,7 @@ function addVideoToPanel(video){
     img:video.img,
     title:video.title,
     type:video.type,
-    link: `https://sleepy-beyond-48017.herokuapp.com/workout.html?sessionid=${generateSession(8)}=&videoid=${video.videoId}`
+    link: `http://localhost:3000/workout.html?sessionid=${generateSession(12)}=&videoid=${video.videoId}`
   });
   jQuery('#videos-container').append(html);
 }

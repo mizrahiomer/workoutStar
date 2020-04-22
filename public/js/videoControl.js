@@ -6,6 +6,7 @@ var lockScreen = false;
 
 var randomParise = ['Good Job!', 'Well Done!!', 'You are GREAT!', 'GO GO GO', 'Almost there', 'Yeaaaa!', 'Have Fun!', 'You can Do It :-)']
 var randomPraiseClass = ['random1','random2','random3','random4','random5','random6','random7'];
+
 socket.on('connect', function () {});
 
 function onPlayerStateChange(event){
@@ -34,12 +35,11 @@ function onPlayerStateChange(event){
 function catchError(event){
   if(event.data == 100) console.log("De video bestaat niet meer");
 }
-
 function onPlayIsReady(event) {
   var params = deparam(window.location.search);
 
-  var {sessionid,admin} = params
-  socket.emit('join',{ sessionid,admin },function(err){});
+  var {sessionid,admin,videoid} = params;
+  socket.emit('join',{ sessionid,admin,videoid },function(err){});
   updateLoadBar();
 
   setInterval(function(){
@@ -51,29 +51,33 @@ function onPlayIsReady(event) {
       })
     }
   },1000)
-
-  socket.on('updateVideoFromServer',function(params) {
-    const {current_time,state} = params;
-    console.log(current_time,state)
-    if(!isAdmin()){
-      if(current_time){
-        event.target.seekTo(current_time);
-        event.target.pauseVideo();
-      }
-      console.log(current_time,state)
-      if(state == 1) playVideoWithCount();
-      else if(state == 2) event.target.pauseVideo();
-    }
-
-    socket.on('error',function(params){
-      console.error(params);
-      const {code} = params;
-      if(code == 0){
-        $('#cover').css('display', 'inline-block')
-      }
-    })
+  socket.on('changeVideoId', function(params){
+    const {videoid} = params;
+    player.loadVideoById(videoid)
   })
 
+  socket.on('updateVideoFromServer',function(params) {
+    const {current_time,state,video} = params;
+    if(!isAdmin()){
+      var timeout = 0;
+      if(video){
+        var curr_video = player.getVideoData()['video_id']
+        if(curr_video!=video){
+          player.loadVideoById(video)
+          timeout = 1500;
+        }
+      }
+      setTimeout(function(){
+        if(current_time){
+          player.seekTo(current_time);
+          player.pauseVideo();
+        }
+        if(state == 1) playVideoWithCount();
+        else if(state == 2) player.pauseVideo();
+      },timeout)
+
+    }
+  })
   socket.on('praiseAllFromServer',function(params) {
     if(!praiseShown){
       const {word} = params;
@@ -81,6 +85,11 @@ function onPlayIsReady(event) {
     }
   })
 }
+
+socket.on('errorHandler',function(){
+  window.location.href= 'https://workoutathome.online/';
+})
+
 
 function showPraise(duration,word){
   var praise = document.getElementById('prais-message');
@@ -189,10 +198,19 @@ function onYouTubePlayer(videoId) {
 
 }
 
-function isAdmin(){
+function loadVideo(videoid){
+  if(isAdmin()){
     var params = deparam(window.location.search);
-    var {admin} = params;
-    return admin == undefined || admin == 1;
+    var {sessionid} = params;
+    socket.emit('loadVideo',{videoid,sessionid})
+  }
+}
+
+
+function isAdmin(){
+  var params = deparam(window.location.search);
+  var {admin} = params;
+  return admin == undefined || admin == 1;
 }
 
 function sendPraise(){
@@ -212,14 +230,3 @@ $(document).ready( function() {
   }
 });
 
-
-// var videos = [];
-
-
-
-// var types = ['type1','type2', 'type3'];
-// var mat = false;
-// var dumbbell = true;
-
-// const videoToDisplay =videos.filter(
-//   video => types.includes(video.type) && video.mat == mat && video.dumbbell == dumbbell);

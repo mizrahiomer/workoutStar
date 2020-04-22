@@ -46,7 +46,7 @@
           <button id="video-button" class="stream-control" onclick="toggleVideo()">
               <i class="fas fa-video"></i>
           </button>
-          <button id="share-facebook" class="sharebutton" onclick="shareOnFacebook()">
+          <button id="share-facebook" class="sharebutton">
             <span>Share on </span><i class="fab fa-facebook-f"></i>
           </button>
           <button id="copyBtn" class="sharebutton" onclick="copyUrl()">
@@ -99,18 +99,15 @@
           },2000)
       }
 
-      function shareOnFacebook(){
+      $('#share-facebook').click(function(){
         var text = window.location.href;
+
         if(!text.includes('&admin=0')) text += '&admin=0';
         var url = 'https://www.facebook.com/sharer/sharer.php?u='+text;
-        var link = document.createElement('a');
-        link.href = url;
-        link.target = '_blank';
-        link.id = 'uniqId';
-        document.querySelector('#share-facebook').append(link);
-        link.click();
-        document.querySelector('#uniqId').remove(link);
-      }
+        var win = window.open(url, '_blank');
+        win.focus();
+      })
+
       function toggelAudio(){
         var audioplayer = document.querySelector('audio');
         if(!audioplayer.paused){

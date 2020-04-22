@@ -8,6 +8,7 @@ class Session{
         this.users = []
         this.state = PAUSE;
         this.time = 0;
+        this.videoid = ''
 
     }
 
@@ -62,6 +63,14 @@ class Session{
         return this;
     }
 
+    setVideo(videoid){
+        this.videoid = videoid;
+        return this;
+    }
+
+    getVideo(){
+        return this.videoid;
+    }
     isEmpty(){
         return this.users.length == 0;
     }
